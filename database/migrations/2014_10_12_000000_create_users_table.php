@@ -6,31 +6,31 @@ use Illuminate\Database\Migrations\Migration;
 class CreateUsersTable extends Migration {
 
 	/**
-	 * Run the migrations.
+	 * Corre la migracion para crear la tabla de Cuentas de la base de datos
 	 *
 	 * @return void
 	 */
 	public function up()
 	{
-		Schema::create('users', function(Blueprint $table)
+		Schema::create('cuentas', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->string('name');
-			$table->string('email')->unique();
+			$table->string('rut',12);
 			$table->string('password', 60);
 			$table->rememberToken();
 			$table->timestamps();
+			$table->softDeletes();
 		});
 	}
 
 	/**
-	 * Reverse the migrations.
+	 * Revierte la creacion de la tabla cuentas
 	 *
 	 * @return void
 	 */
 	public function down()
 	{
-		Schema::drop('users');
+		Schema::drop('cuentas');
 	}
 
 }
