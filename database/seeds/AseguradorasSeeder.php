@@ -25,14 +25,13 @@ class AseguradorasSeeder extends Seeder{
         ];
 
         for($i=0;$i<14;$i++){
-            $now = date('Y-m-d H:i:s');
             DB::table('salud')->insert([
                 'nombre' => $nombres[$i],
                 'telefono' => $faker->phoneNumber,
                 'email' => $faker->companyEmail,
                 'link_envio' => $faker->unique()->ipv6,
-                'created_at' => $now,
-                'updated_at' => $now
+                'created_at' => 'now',
+                'updated_at' => 'now'
             ]);
         }
 
