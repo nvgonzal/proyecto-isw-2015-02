@@ -33,7 +33,7 @@ class CargasSeeder extends Seeder{
 
         for($i=0;$i<60;$i++){
             DB::table('cargas')->insert([
-                'rut' => $faker->unique()->numerify('##.###.###.#'),
+                'rut' => $faker->unique()->numerify('##.###.###-#'),
                 'nombres' => $faker->firstName,
                 'apellido_paterno' => $faker->lastName,
                 'apellido_materno' => $faker->lastName,

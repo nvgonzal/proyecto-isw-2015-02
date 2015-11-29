@@ -34,7 +34,7 @@ class EmpleadosSeeder extends Seeder{
 
         for($i=0;$i<36;$i++){
             DB::table('empleados')->insert([
-                'rut' => $faker->unique()->numerify('##.###.###.#'),
+                'rut' => $faker->unique()->numerify('##.###.###-#'),
                 'nombres' => $faker->firstName,
                 'apellido_paterno' => $faker->lastName,
                 'apellido_materno' => $faker->lastName,
