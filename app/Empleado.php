@@ -6,6 +6,8 @@ class Empleado extends Model {
 
 	protected $table = 'empleados';
 
+    protected $primaryKey = 'rut';
+
     public function AFP(){
         return $this->belongsTo('app/AFP','id_afp');
     }
