@@ -145,6 +145,7 @@ return [
 		'App\Providers\EventServiceProvider',
 		'App\Providers\RouteServiceProvider',
 		'Collective\Html\HtmlServiceProvider',
+		'Barryvdh\Debugbar\ServiceProvider',
 
 	],
 
@@ -195,6 +196,7 @@ return [
 		'View'      => 'Illuminate\Support\Facades\View',
 		'Form' => 'Collective\Html\FormFacade',
 		'Html' => 'Collective\Html\HtmlFacade',
+		'Debugbar' => 'Barryvdh\Debugbar\Facade::class,'
 
 	],
 
