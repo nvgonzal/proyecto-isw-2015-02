@@ -10,6 +10,8 @@
         <th>Apeliido Materno</th>
         <th>Telefono</th>
         <th>Email</th>
+        <th>Cargo</th>
+        <th>Acciones</th>
             @foreach($empleados as $empleado)
                 <tr>
                     <td>{{$empleado->rut}}</td>
@@ -18,9 +20,15 @@
                     <td>{{$empleado->apellido_materno}}</td>
                     <td>{{$empleado->telefono}}</td>
                     <td>{{$empleado->email}}</td>
+                    <td>{{$empleado->cargo}}</td>
+                    <td>
+                        <a class="btn btn-default" href="{!! URL::to('empleados/'.$empleado->rut) !!}">
+                            <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                        </a>
+                    </td>
                 </tr>
             @endforeach
     </table>
-    {!!$empleados->render()!!}
+    <div class="text-center"> {!! $empleados->render() !!}</div>
 
 @endsection
