@@ -43,12 +43,14 @@ class EmpleadoController extends Controller {
 	/**
 	 * Display the specified resource.
 	 *
-	 * @param  int  $id
+	 * @param  int  $rut
 	 * @return Response
 	 */
-	public function show($id)
+	public function show($rut)
 	{
 		//
+		$empleado = Empleado::find($rut);
+		return view('empleados.show')->with('empleado',$empleado);
 	}
 
 	/**
