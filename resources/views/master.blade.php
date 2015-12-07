@@ -12,7 +12,7 @@
     <body>
         <header>
         </header>
-        <nav class="navbar navbar-default">
+        <nav class="navbar navbar-inverse">
             <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
@@ -48,6 +48,7 @@
             </div>
         </footer>
         {!! Html::script('js/bootstrap.js') !!}
+        {!! Html::script('js/jquery-1.11.3.js') !!}
     </body>
 
 </html>
