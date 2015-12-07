@@ -11,7 +11,5 @@
 |
 */
 
-Route::get('/', 'WelcomeController@index');
-
 Route::resource('empleados','EmpleadoController');
 
