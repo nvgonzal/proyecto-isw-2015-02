@@ -9,26 +9,26 @@ class Empleado extends Model {
     protected $primaryKey = 'rut';
 
     public function AFP(){
-        return $this->belongsTo('app/AFP','id_afp');
+        return $this->belongsTo('App\AFP','id_afp');
     }
 
     public function Aseguradora(){
-        return $this->belongsTo('app/Aseguradora','id_aseguradora');
+        return $this->belongsTo('App\Aseguradora','id_aseguradora');
     }
 
     public function cuenta(){
-        return $this->hasOne('app/Cuenta','id_cuenta');
+        return $this->hasOne('App\Cuenta','id_cuenta');
     }
 
     public function cargas(){
-        return $this->hasMany('app/Cuenta');
+        return $this->hasMany('App\Carga');
     }
 
     public function liquidaciones(){
-        return $this->hasMany('app/Liquidacion');
+        return $this->hasMany('App\Liquidacion');
     }
 
     public function asistencias(){
-        return $this->hasMany('app/Liquidacion');
+        return $this->hasMany('App\Asistencia');
     }
 }
