@@ -39,8 +39,27 @@ class EmpleadoController extends Controller {
 	 */
 	public function store(Request $request)
 	{
-		//
-
+		$empleado = new Empleado();
+		dd($request);
+		$empleado->setAttribute('rut',$request->input('rut'));
+		$empleado->setAttribute('nombres',$request->input('nombres'));
+		$empleado->setAttribute('apellido_paterno',$request->input('apellido_paterno'));
+		$empleado->setAttribute('apellido_materno',$request->input('apellido_materno'));
+		$empleado->setAttribute('f_nacimiento',$request->input('f_nacimiento'));
+		$empleado->setAttribute('f_incorporacion',$request->input('f_incorporacion'));
+		$empleado->setAttribute('cargo',$request->input('cargo'));
+		$empleado->setAttribute('titulo',$request->input('titulo'));
+		$empleado->setAttribute('telefono',$request->input('telefono'));
+		$empleado->setAttribute('domicilio',$request->input('domicilio'));
+		$empleado->setAttribute('sueldo_base',$request->input('suledo_base'));
+		$empleado->setAttribute('id_afp',$request->input('afp'));
+		$empleado->setAttribute('id_aseguradora',$request->input('salud'));
+		$empleado->setAttribute('cuenta_bancaria',$request->input('cuenta_bancaria'));
+		$now = date('Y-m-d H:i:s');
+		$empleado->setAttribute('created_at',$now);
+		$empleado->setAttribute('updated_at',$now);
+		$empleado->save();
+		return view('empleados.createexito');
 	}
 
 	/**
