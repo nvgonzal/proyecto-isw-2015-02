@@ -22,7 +22,8 @@
                     <td>{{$empleado->email}}</td>
                     <td>{{$empleado->cargo}}</td>
                     <td>
-                        <a class="btn btn-default" href="{!! URL::to('empleados/'.$empleado->rut) !!}">
+                        <a class="btn btn-default" data-toggle="tooltip" title="Informacion detallada"
+                           href="{!! URL::to('empleados/'.$empleado->rut) !!}">
                             <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
                         </a>
                     </td>
