@@ -7,10 +7,10 @@
         <h3>Formulario ingreso de nuevo empleado</h3>
     </div>
     <div class="row">
-        {!! Form::open(['url'=>'empleados.store','class'=>'form-horizontal','metod'=>'post']) !!}
+        {!! Form::open(['route'=>'empleados.store','class'=>'form-horizontal','metod'=>'post']) !!}
         <div class="form-group">
             {!! Form::label('nombres','Nombres',['class'=>'control-label']) !!}
-            {!! Form::text('nombre',null,['class'=>'form-control']) !!}
+            {!! Form::text('nombres',null,['class'=>'form-control']) !!}
         </div>
         <div class="form-group">
             {!! Form::label('apellido_paterno', 'Apellido Paterno',['class'=>'control-label']) !!}
@@ -19,6 +19,10 @@
         <div class="form-group">
             {!! Form::label('apeliido_materno', 'Apellido Materno',['class'=>'control-label']) !!}
             {!! Form::text('apeliido_materno', null,['class'=>'form-control']) !!}
+        </div>
+        <div class="form-group">
+            {!! Form::label('rut','Rut',['class'=>'control-label']) !!}
+            {!! Form::text('rut',null,['class'=>'form-control']) !!}
         </div>
         <div class="form-group">
             {!! Form::label('f_nacimiento', 'Fecha Nacimiento',['class'=>'control-label']) !!}
@@ -34,6 +38,14 @@
             ,'Profesor en practica'=>'Profesor en practica'
             ,'Secretario/a'=>'Secretario/a'
             ,'Inspector/a'=>'Inspector/a'],null,['class'=>'form-control']) !!}
+        </div>
+        <div class="form-group">
+            {!! Form::label('titulo','Titulo',['class'=>'control-label']) !!}
+            {!! Form::text('titulo',null,['class'=>'form-control']) !!}
+        </div>
+        <div class="form-group">
+            {!! Form::label('domicilio','Domicilio',['class'=>'control-label']) !!}
+            {!! Form::text('domicilio',null,['class'=>'form-control']) !!}
         </div>
         <div class="form-group has-feedback">
             {!! Form::label('telefono', 'Telefono',['class'=>'control-label']) !!}
@@ -54,7 +66,7 @@
             </select>
         </div>
         <div class="form-group">
-            {!! Form::label('sueldo_base', 'Prevision de salud',['class'=>'control-label']) !!}
+            {!! Form::label('salud', 'Prevision de salud',['class'=>'control-label']) !!}
             <select class="form-control">
                 <option value="null">Sin prevision</option>
                 @foreach(\App\Aseguradora::all() as $afp)
