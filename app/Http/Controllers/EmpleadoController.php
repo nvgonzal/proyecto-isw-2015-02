@@ -28,16 +28,19 @@ class EmpleadoController extends Controller {
 	public function create()
 	{
 		//
+		return view('empleados.create');
 	}
 
 	/**
 	 * Store a newly created resource in storage.
 	 *
+	 * @param Request $request
 	 * @return Response
 	 */
-	public function store()
+	public function store(Request $request)
 	{
 		//
+
 	}
 
 	/**
