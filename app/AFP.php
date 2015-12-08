@@ -7,7 +7,7 @@ class AFP extends Model {
     protected $table = 'afps';
 
     public function empleados(){
-        return $this->hasMany('app/Empleado');
+        return $this->hasMany('App\Empleado');
     }
 
 }
