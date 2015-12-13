@@ -7,7 +7,7 @@
         <h3>Formulario ingreso de nuevo empleado</h3>
     </div>
     <div class="row">
-        {!! Form::open(['route'=>'empleados.store','class'=>'form-horizontal','metod'=>'post']) !!}
+        {!! Form::open(['route'=>'empleados.store','class'=>'form-horizontal','method'=>'post']) !!}
         <div class="form-group">
             {!! Form::label('nombres','Nombres',['class'=>'control-label']) !!}
             {!! Form::text('nombres',null,['class'=>'form-control']) !!}
@@ -17,8 +17,8 @@
             {!! Form::text('apellido_paterno', null,['class'=>'form-control']) !!}
         </div>
         <div class="form-group">
-            {!! Form::label('apeliido_materno', 'Apellido Materno',['class'=>'control-label']) !!}
-            {!! Form::text('apeliido_materno', null,['class'=>'form-control']) !!}
+            {!! Form::label('apellido_materno', 'Apellido Materno',['class'=>'control-label']) !!}
+            {!! Form::text('apellido_materno', null,['class'=>'form-control']) !!}
         </div>
         <div class="form-group">
             {!! Form::label('rut','Rut',['class'=>'control-label']) !!}
