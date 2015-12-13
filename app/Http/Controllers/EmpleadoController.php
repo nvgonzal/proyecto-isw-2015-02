@@ -84,6 +84,8 @@ class EmpleadoController extends Controller {
 	public function edit($id)
 	{
 		//
+		$empleado = Empleado::find($id);
+		return view('empleados.edit')->with('empleado',$empleado);
 	}
 
 	/**
