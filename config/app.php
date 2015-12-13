@@ -146,6 +146,7 @@ return [
 		'App\Providers\RouteServiceProvider',
 		'Collective\Html\HtmlServiceProvider',
 		'Barryvdh\Debugbar\ServiceProvider',
+		'Laracasts\Flash\FlashServiceProvider',
 
 	],
 
@@ -196,7 +197,8 @@ return [
 		'View'      => 'Illuminate\Support\Facades\View',
 		'Form' => 'Collective\Html\FormFacade',
 		'Html' => 'Collective\Html\HtmlFacade',
-		'Debugbar' => 'Barryvdh\Debugbar\Facade::class,'
+		'Debugbar' => 'Barryvdh\Debugbar\Facade::class,',
+		'Flash' => 'Laracasts\Flash\Flash',
 
 	],
 
