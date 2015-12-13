@@ -22,14 +22,17 @@
                     <td>{{$empleado->email}}</td>
                     <td>{{$empleado->cargo}}</td>
                     <td>
-                        <a class="btn btn-default" data-toggle="tooltip" title="Informacion detallada"
+                        <a class="btn btn-primary" data-toggle="tooltip" title="Informacion detallada"
                            href="{!! URL::to('empleados/'.$empleado->rut) !!}">
                             <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                        </a>
+                        <a class="btn btn-warning" data-toggle="tooltip" title="Editar informacion"
+                           href="{!! URL::to('empleados/'.$empleado->rut.'/edit') !!}">
+                            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                         </a>
                     </td>
                 </tr>
             @endforeach
     </table>
     <div class="text-center"> {!! $empleados->render() !!}</div>
-
-@endsection
+@stop
