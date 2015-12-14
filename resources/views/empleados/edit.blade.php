@@ -58,7 +58,7 @@
             {!! Form::label('afp', 'Prevision social',['class'=>'control-label']) !!}
             <select class="form-control">
                 @foreach(\App\AFP::all() as $afp)
-                    <option value="{!! $afp->id !!}">{{$afp->nombre}}</option>
+                    <option value="{{$afp->id}}">{{$afp->nombre}}</option>
                 @endforeach
             </select>
         </div>
@@ -66,8 +66,8 @@
             {!! Form::label('salud', 'Prevision de salud',['class'=>'control-label']) !!}
             <select class="form-control">
                 <option value="null">Sin prevision</option>
-                @foreach(\App\Aseguradora::all() as $afp)
-                    <option value="{!! $afp->id !!}">{{$afp->nombre}}</option>
+                @foreach(\App\Aseguradora::all() as $previsionSalud)
+                    <option value="{{$previsionSalud->id }}">{{$previsionSalud->nombre}}</option>
                 @endforeach
             </select>
         </div>
