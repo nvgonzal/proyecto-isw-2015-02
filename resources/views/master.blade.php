@@ -6,6 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="Pagina creada para el ramo de ingenieria de software">
         {!! Html::style('css/bootstrap.css') !!}
+        {!! Html::style('css/estilo.css') !!}
         <title>@yield('titulo') | Colegio Alba</title>
 
     </head>
@@ -41,6 +42,7 @@
             </div><!-- /.container-fluid -->
         </nav>
         <div class="container">
+            @include('flash::message')
             @yield('contenido')
         </div>
        <!-- <footer class="footer">
