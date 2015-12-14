@@ -40,7 +40,6 @@ class EmpleadoController extends Controller {
 	public function store(Request $request)
 	{
 		$empleado = new Empleado();
-		dd($request);
 		$empleado->setAttribute('rut',$request->input('rut'));
 		$empleado->setAttribute('nombres',$request->input('nombres'));
 		$empleado->setAttribute('apellido_paterno',$request->input('apellido_paterno'));
@@ -83,7 +82,6 @@ class EmpleadoController extends Controller {
 	 */
 	public function edit($id)
 	{
-		//
 		$empleado = Empleado::find($id);
 		return view('empleados.edit')->with('empleado',$empleado);
 	}
@@ -91,12 +89,13 @@ class EmpleadoController extends Controller {
 	/**
 	 * Update the specified resource in storage.
 	 *
+	 * @param Request $request
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update(Request $request,$id)
 	{
-		//
+
 	}
 
 	/**
@@ -107,7 +106,7 @@ class EmpleadoController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		//
+
 	}
 
 }
