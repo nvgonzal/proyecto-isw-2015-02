@@ -3,15 +3,20 @@
 @section('titulo','Informacion empleados')
 
 @section('contenido')
-    <table class="table table-striped">
-        <th>Rut</th>
-        <th>Nombres</th>
-        <th>Apellido Paterno</th>
-        <th>Apeliido Materno</th>
-        <th>Telefono</th>
-        <th>Email</th>
-        <th>Cargo</th>
-        <th>Acciones</th>
+    <a class="btn btn-success boton-fixed" data-toggle="tooltip" title="Agregar empleado"
+       href="{!! URL::to('empleados/create') !!}">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+    </a>
+    <div class="container">
+        <table class="table table-striped">
+            <th>Rut</th>
+            <th>Nombres</th>
+            <th>Apellido Paterno</th>
+            <th>Apeliido Materno</th>
+            <th>Telefono</th>
+            <th>Email</th>
+            <th>Cargo</th>
+            <th>Acciones</th>
             @foreach($empleados as $empleado)
                 <tr>
                     <td>{{$empleado->rut}}</td>
@@ -33,6 +38,7 @@
                     </td>
                 </tr>
             @endforeach
-    </table>
+        </table>
+    </div>
     <div class="text-center"> {!! $empleados->render() !!}</div>
 @stop
