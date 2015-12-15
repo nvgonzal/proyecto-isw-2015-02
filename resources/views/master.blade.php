@@ -13,6 +13,7 @@
 
     <body>
         <header>
+            {!! Html::image(URL::to('img/banner.jpg'),'Banner',['class'=>'img-responsive'],null) !!}
         </header>
         <nav class="navbar navbar-inverse">
             <div class="container-fluid">
