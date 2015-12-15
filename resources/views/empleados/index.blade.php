@@ -3,8 +3,8 @@
 @section('titulo','Informacion empleados')
 
 @section('contenido')
-    <a class="btn btn-success boton-fixed" data-toggle="tooltip" title="Agregar empleado"
-       href="{!! URL::to('empleados/create') !!}">
+    <a class="btn btn-success boton-fixed btn-lg" data-toggle="tooltip" title="Agregar empleado"
+               href="{!! URL::to('empleados/create') !!}">
         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
     </a>
     <div class="container">
@@ -27,13 +27,17 @@
                     <td>{{$empleado->email}}</td>
                     <td>{{$empleado->cargo}}</td>
                     <td>
-                        <a class="btn btn-primary" data-toggle="tooltip" title="Informacion detallada"
+                        <a class="btn btn-primary btn-sm" data-toggle="tooltip" title="Informacion detallada"
                            href="{!! URL::to('empleados/'.$empleado->rut) !!}">
                             <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
                         </a>
-                        <a class="btn btn-warning" data-toggle="tooltip" title="Editar informacion"
+                        <a class="btn btn-warning btn-sm" data-toggle="tooltip" title="Editar informacion"
                            href="{!! URL::to('empleados/'.$empleado->rut.'/edit') !!}">
                             <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                        </a>
+                        <a class="btn btn-danger btn-sm" data-toggle="tooltip" title="Eliminar empleado"
+                           href="#">
+                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                         </a>
                     </td>
                 </tr>
