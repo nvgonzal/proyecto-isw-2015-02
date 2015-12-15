@@ -58,19 +58,19 @@
             <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
         </div>
         <div class="form-group">
-            {!! Form::label('afp', 'Prevision social',['class'=>'control-label']) !!}
-            <select class="form-control">
+            {!! Form::label('id_afp', 'Prevision social',['class'=>'control-label']) !!}
+            <select class="form-control" id="id_afp" name="id_afp">
                 @foreach(\App\AFP::all() as $afp)
                     <option value="{!! $afp->id !!}">{{$afp->nombre}}</option>
                 @endforeach
             </select>
         </div>
         <div class="form-group">
-            {!! Form::label('salud', 'Prevision de salud',['class'=>'control-label']) !!}
-            <select class="form-control">
+            {!! Form::label('id_aseguradora', 'Prevision de salud',['class'=>'control-label']) !!}
+            <select class="form-control" id="id_aseguradora" name="id_aseguradora">
                 <option value="null">Sin prevision</option>
-                @foreach(\App\Aseguradora::all() as $afp)
-                    <option value="{!! $afp->id !!}">{{$afp->nombre}}</option>
+                @foreach(\App\Aseguradora::all() as $aseguradora)
+                    <option value="{!! $aseguradora->id !!}">{{$aseguradora->nombre}}</option>
                 @endforeach
             </select>
         </div>
