@@ -6,6 +6,13 @@
     <div class="page-header">
         <h3>Formulario ingreso de nuevo empleado</h3>
     </div>
+    @if($errors->has())
+        <div class="alert alert-danger">
+            @foreach($errors->all() as $error)
+                {!! $error !!}
+            @endforeach
+        </div>
+    @endif
     <div class="row">
         {!! Form::open(['route'=>'empleados.store','class'=>'form-horizontal','method'=>'post']) !!}
         <div class="form-group">
