@@ -147,6 +147,7 @@ return [
 		'Collective\Html\HtmlServiceProvider',
 		'Barryvdh\Debugbar\ServiceProvider',
 		'Laracasts\Flash\FlashServiceProvider',
+		'Freshwork\ChileanBundle\Laravel\ChileanBundleServiceProvider',
 
 	],
 

@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "80446ef41a96369d41dc3f2d4ad042d1",
-    "content-hash": "a1518105bf0c59b25344e8d3b6186bff",
+    "hash": "c772fa78ee044e2036e864944868f814",
+    "content-hash": "a306049b1fd4e821675f3e1f664de360",
     "packages": [
         {
             "name": "barryvdh/laravel-debugbar",
@@ -678,6 +678,52 @@
                 "parser"
             ],
             "time": "2014-09-09 13:34:57"
+        },
+        {
+            "name": "freshwork/chilean-bundle",
+            "version": "1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/freshworkstudio/ChileanBundle.git",
+                "reference": "02c1c74b1d76c354a990f78c446f7708063f98a7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/freshworkstudio/ChileanBundle/zipball/02c1c74b1d76c354a990f78c446f7708063f98a7",
+                "reference": "02c1c74b1d76c354a990f78c446f7708063f98a7",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "codeception/codeception": "~2.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Freshwork\\ChileanBundle": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPLv3"
+            ],
+            "authors": [
+                {
+                    "name": "Gonzalo De Spirito | Freshwork Studio Chile",
+                    "email": "gonzalo@freshworkstudio.com"
+                }
+            ],
+            "description": "A PHP composer package with Chilean validations, common variables, etc. (RUT, IVA, ETC). Ready for Laravel 4. Grande chile ctm :)",
+            "keywords": [
+                "chile",
+                "freshwork",
+                "rut",
+                "tools",
+                "validation"
+            ],
+            "time": "2015-03-03 16:08:50"
         },
         {
             "name": "fzaninotto/faker",
