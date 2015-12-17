@@ -6,6 +6,7 @@ use App\Empleado;
 use Freshwork\ChileanBundle\Facades\Rut;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Laracasts\Flash\Flash;
 
 class EmpleadoController extends Controller {
 
@@ -70,7 +71,7 @@ class EmpleadoController extends Controller {
 			'email' => 'required|email',
 			'domicilio' => 'required',
 			'id_afp' => 'required|exists:afps,id',
-			'id_aseguradora' => 'exists:salud,id',
+			'id_aseguradora' => '',
 			'cuenta_bancaria' => 'required',
 
 		];
@@ -89,7 +90,8 @@ class EmpleadoController extends Controller {
 		$empleado->setAttribute('titulo',$request->input('titulo'));
 		$empleado->setAttribute('telefono',$request->input('telefono'));
 		$empleado->setAttribute('domicilio',$request->input('domicilio'));
-		$empleado->setAttribute('sueldo_base',$request->input('suledo_base'));
+		$empleado->setAttribute('email',$request->input('email'));
+		$empleado->setAttribute('sueldo_base',$request->input('sueldo_base'));
 		$empleado->setAttribute('id_afp',$request->input('id_afp'));
 		$empleado->setAttribute('id_aseguradora',$request->input('id_salud'));
 		$empleado->setAttribute('cuenta_bancaria',$request->input('cuenta_bancaria'));
@@ -97,7 +99,8 @@ class EmpleadoController extends Controller {
 		$empleado->setAttribute('created_at',$now);
 		$empleado->setAttribute('updated_at',$now);
 		$empleado->save();
-		return view('empleados.createexito');
+		Flash::success('Empleado ingresado con exito');
+		return redirect('empleados');
 	}
 
 	/**
@@ -145,7 +148,8 @@ class EmpleadoController extends Controller {
 	 */
 	public function destroy($id)
 	{
-
+		$empleado = Empleado::find($id);
+		$empleado->delete();
 	}
 
 }
