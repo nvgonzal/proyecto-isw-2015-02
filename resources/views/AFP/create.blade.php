@@ -17,7 +17,7 @@
             {!! Form::text('nombre',null,['class'=>'form-control']) !!}
         </div>
         <div class="form-group has-feedback">
-            {!! Form::label('email', 'Correo Electronico',['class'=>'control-label']) !!}
+            {!! Form::label('email', 'E-Mail',['class'=>'control-label']) !!}
             {!! Form::text('email', null,['class'=>'form-control']) !!}
             <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
         </div>
