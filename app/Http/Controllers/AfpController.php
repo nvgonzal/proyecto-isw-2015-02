@@ -33,9 +33,20 @@ class AfpController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function store(Request $request)
 	{
-		//
+		$AFP = new AFP();
+		dd($request);
+		$AFP->setAttribute('rut',$request->input('rut'));
+		$AFP->setAttribute('nombre',$request->input('nombre'));
+		$AFP->setAttribute('email',$request->input('email'));
+		$AFP->setAttribute('telefono',$request->input('telefono'));
+		$AFP->setAttribute('link',$request->input('link'));
+		$now = date('Y-m-d H:i:s');
+		$AFP->setAttribute('created_at',$now);
+		$AFP->setAttribute('updated_at',$now);
+		$AFP->save();
+		return view('AFP.createexito');
 	}
 
 	/**
@@ -44,9 +55,10 @@ class AfpController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($id)
+	public function show($rut)
 	{
-		//
+		$AFP = Empleado::find($rut);
+		return view('AFP.show')->with('AFP',$AFP);
 	}
 
 	/**
