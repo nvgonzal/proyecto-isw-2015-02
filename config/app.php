@@ -52,7 +52,7 @@ return [
 	|
 	*/
 
-	'locale' => 'en',
+	'locale' => 'es',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -146,6 +146,8 @@ return [
 		'App\Providers\RouteServiceProvider',
 		'Collective\Html\HtmlServiceProvider',
 		'Barryvdh\Debugbar\ServiceProvider',
+		'Laracasts\Flash\FlashServiceProvider',
+		'Freshwork\ChileanBundle\Laravel\ChileanBundleServiceProvider',
 
 	],
 
@@ -196,7 +198,8 @@ return [
 		'View'      => 'Illuminate\Support\Facades\View',
 		'Form' => 'Collective\Html\FormFacade',
 		'Html' => 'Collective\Html\HtmlFacade',
-		'Debugbar' => 'Barryvdh\Debugbar\Facade::class,'
+		'Debugbar' => 'Barryvdh\Debugbar\Facade::class,',
+		'Flash' => 'Laracasts\Flash\Flash',
 
 	],
 

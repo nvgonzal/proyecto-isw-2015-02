@@ -25,7 +25,6 @@ class AuthController extends Controller {
 	 *
 	 * @param  \Illuminate\Contracts\Auth\Guard  $auth
 	 * @param  \Illuminate\Contracts\Auth\Registrar  $registrar
-	 * @return void
 	 */
 	public function __construct(Guard $auth, Registrar $registrar)
 	{
@@ -33,6 +32,11 @@ class AuthController extends Controller {
 		$this->registrar = $registrar;
 
 		$this->middleware('guest', ['except' => 'getLogout']);
+	}
+
+
+	public function getLogin(){
+		return view('auth.login');
 	}
 
 }

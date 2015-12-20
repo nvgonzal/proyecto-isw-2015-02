@@ -4,18 +4,24 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="Pagina creada para el ramo de ingenieria de software">
         {!! Html::style('css/bootstrap.css') !!}
+        {!! Html::style('css/estilo.css') !!}
         <title>@yield('titulo') | Colegio Alba</title>
 
     </head>
 
     <body>
         <header>
+            {!! Html::image(URL::to('img/banner.jpg'),'Banner',['class'=>'img-responsive'],null) !!}
         </header>
         <nav class="navbar navbar-inverse">
             <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
+                    <a class="navbar-brand">
+                        {!! HTML::image(URL::to('img/logo.png'),'logo.png',['class'=>'img-responsive']) !!}
+                    </a>
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                         <span class="sr-only">Toggle navigation</span>
                         <span class="icon-bar"></span>
@@ -40,6 +46,7 @@
             </div><!-- /.container-fluid -->
         </nav>
         <div class="container">
+            @include('flash::message')
             @yield('contenido')
         </div>
        <!-- <footer class="footer">

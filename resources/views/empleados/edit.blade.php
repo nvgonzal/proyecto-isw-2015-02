@@ -1,20 +1,10 @@
 @extends('master')
 
-@section('titulo','Ingresar nuevo empleado')
+@section('titulo','Editar empleado '.$empleado->nombres.' '.$empleado->apellido_paterno.' '.$empleado->apellido_materno)
 
 @section('contenido')
-    <div class="page-header">
-        <h3>Formulario ingreso de nuevo empleado</h3>
-    </div>
-    @if($errors->has())
-        <div class="alert alert-danger">
-            @foreach($errors->all() as $error)
-                {!! $error !!}
-            @endforeach
-        </div>
-    @endif
     <div class="row">
-        {!! Form::open(['route'=>'empleados.store','class'=>'form-horizontal','method'=>'post']) !!}
+        {!! Form::model($empleado,['route'=>['empleados.update',$empleado],'class'=>'form-horizontal','method'=>'PUT']) !!}
         <div class="form-group">
             {!! Form::label('nombres','Nombres',['class'=>'control-label']) !!}
             {!! Form::text('nombres',null,['class'=>'form-control']) !!}
@@ -33,11 +23,11 @@
         </div>
         <div class="form-group">
             {!! Form::label('f_nacimiento', 'Fecha Nacimiento',['class'=>'control-label']) !!}
-            {!! Form::date('f_nacimiento',\Carbon\Carbon::now(),['class'=>'form-control']) !!}
+            {!! Form::date('f_nacimiento',null,['class'=>'form-control']) !!}
         </div>
         <div class="form-group">
             {!! Form::label('f_incorporacion', 'Fecha Incorporacion',['class'=>'control-label']) !!}
-            {!! Form::date('f_incorporacion',\Carbon\Carbon::now(),['class'=>'form-control']) !!}
+            {!! Form::date('f_incorporacion',null,['class'=>'form-control']) !!}
         </div>
         <div class="form-group">
             {!! Form::label('cargo', 'Cargo',['class'=>'control-label']) !!}
@@ -65,19 +55,19 @@
             <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
         </div>
         <div class="form-group">
-            {!! Form::label('id_afp', 'Prevision social',['class'=>'control-label']) !!}
-            <select class="form-control" id="id_afp" name="id_afp">
+            {!! Form::label('afp', 'Prevision social',['class'=>'control-label']) !!}
+            <select class="form-control">
                 @foreach(\App\AFP::all() as $afp)
-                    <option value="{!! $afp->id !!}">{{$afp->nombre}}</option>
+                    <option value="{{$afp->id}}">{{$afp->nombre}}</option>
                 @endforeach
             </select>
         </div>
         <div class="form-group">
-            {!! Form::label('id_aseguradora', 'Prevision de salud',['class'=>'control-label']) !!}
-            <select class="form-control" id="id_aseguradora" name="id_aseguradora">
+            {!! Form::label('salud', 'Prevision de salud',['class'=>'control-label']) !!}
+            <select class="form-control">
                 <option value="null">Sin prevision</option>
-                @foreach(\App\Aseguradora::all() as $aseguradora)
-                    <option value="{!! $aseguradora->id !!}">{{$aseguradora->nombre}}</option>
+                @foreach(\App\Aseguradora::all() as $previsionSalud)
+                    <option value="{{$previsionSalud->id }}">{{$previsionSalud->nombre}}</option>
                 @endforeach
             </select>
         </div>
@@ -91,9 +81,8 @@
         </div>
         <br/>
 
-        {!! Form::submit('Ingresar empleado',['class'=>'btn btn-default']) !!}
+        {!! Form::submit('Modificar informacion empelado',['class'=>'btn btn-default']) !!}
 
         {!! Form::close() !!}
     </div>
-
-@endsection
+@stop

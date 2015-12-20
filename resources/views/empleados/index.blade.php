@@ -3,15 +3,20 @@
 @section('titulo','Informacion empleados')
 
 @section('contenido')
-    <table class="table table-striped">
-        <th>Rut</th>
-        <th>Nombres</th>
-        <th>Apellido Paterno</th>
-        <th>Apeliido Materno</th>
-        <th>Telefono</th>
-        <th>Email</th>
-        <th>Cargo</th>
-        <th>Acciones</th>
+    <a class="btn btn-success boton-fixed btn-lg" data-toggle="tooltip" title="Agregar empleado"
+               href="{!! URL::to('empleados/create') !!}">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+    </a>
+    <div class="container">
+        <table class="table table-striped">
+            <th>Rut</th>
+            <th>Nombres</th>
+            <th>Apellido Paterno</th>
+            <th>Apeliido Materno</th>
+            <th>Telefono</th>
+            <th>Email</th>
+            <th>Cargo</th>
+            <th>Acciones</th>
             @foreach($empleados as $empleado)
                 <tr>
                     <td>{{$empleado->rut}}</td>
@@ -22,14 +27,22 @@
                     <td>{{$empleado->email}}</td>
                     <td>{{$empleado->cargo}}</td>
                     <td>
-                        <a class="btn btn-default" data-toggle="tooltip" title="Informacion detallada"
+                        <a class="btn btn-primary btn-sm" data-toggle="tooltip" title="Informacion detallada"
                            href="{!! URL::to('empleados/'.$empleado->rut) !!}">
                             <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                        </a>
+                        <a class="btn btn-warning btn-sm" data-toggle="tooltip" title="Editar informacion"
+                           href="{!! URL::to('empleados/'.$empleado->rut.'/edit') !!}">
+                            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                        </a>
+                        <a class="btn btn-danger btn-sm" data-toggle="tooltip" title="Eliminar empleado"
+                           href="#">
+                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                         </a>
                     </td>
                 </tr>
             @endforeach
-    </table>
+        </table>
+    </div>
     <div class="text-center"> {!! $empleados->render() !!}</div>
-
-@endsection
+@stop
