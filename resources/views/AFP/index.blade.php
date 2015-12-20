@@ -11,11 +11,11 @@
         <th>Link</th>
         @foreach($AFP as $AFP)
             <tr>
-                <td>{{$empleado->rut}}</td>
-                <td>{{$empleado->nombres}}</td>
-                <td>{{$empleado->email}}</td>
-                <td>{{$empleado->telefono}}</td>
-                <td>{{$empleado->link}}</td>
+                <td>{{$AFP->rut}}</td>
+                <td>{{$AFP->nombres}}</td>
+                <td>{{$AFP->email}}</td>
+                <td>{{$AFP->telefono}}</td>
+                <td>{{$AFP->link}}</td>
                 <td>
                     <a class="btn btn-default" data-toggle="tooltip" title="Informacion detallada"
                        href="{!! URL::to('AFP/'.$AFP->rut) !!}">
