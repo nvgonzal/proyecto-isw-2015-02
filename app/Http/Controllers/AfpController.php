@@ -70,7 +70,7 @@ class AfpController extends Controller {
 	public function edit($rut)
 	{
 		$AFP = AFP::find($rut);
-		return view('empleados.edit')->with('empleado',$AFP);
+		return view('AFP.edit')->with('AFP',$AFP);
 	}
 
 	/**
