@@ -59,7 +59,7 @@ class EmpleadoController extends Controller {
 			'cuenta_bancaria' => $request->input('cuenta_bancaria'),
 		];
 		$rules = [
-			'rut' => 'required|unique:empleados',
+			'rut' => 'required|unique:empleados,rut|max:12',
 			'nombres' => 'required',
 			'apellido_paterno' => 'required',
 			'apellido_materno' => 'required',
@@ -72,8 +72,7 @@ class EmpleadoController extends Controller {
 			'domicilio' => 'required',
 			'id_afp' => 'required|exists:afps,id',
 			'id_aseguradora' => '',
-			'cuenta_bancaria' => 'required',
-
+			'cuenta_bancaria' => '',
 		];
 		$validacion = Validator::make($input,$rules);
 		if($validacion->fails()){
@@ -95,12 +94,17 @@ class EmpleadoController extends Controller {
 		$empleado->setAttribute('id_afp',$request->input('id_afp'));
 		$empleado->setAttribute('id_aseguradora',$request->input('id_salud'));
 		$empleado->setAttribute('cuenta_bancaria',$request->input('cuenta_bancaria'));
-		$now = date('Y-m-d H:i:s');
+		/*$now = date('Y-m-d H:i:s');
 		$empleado->setAttribute('created_at',$now);
-		$empleado->setAttribute('updated_at',$now);
-		$empleado->save();
-		Flash::success('Empleado ingresado con exito');
-		return redirect('empleados');
+		$empleado->setAttribute('updated_at',$now);*/
+		$exito = $empleado->save();
+		if ($exito) {
+			Flash::success('Empleado ingresado con exito');
+			return redirect('empleados');
+		} else {
+			Flash::error('Empleado no pudo ser ingresado');
+			return redirect('empleados');
+		}
 	}
 
 	/**
@@ -129,6 +133,7 @@ class EmpleadoController extends Controller {
 	}
 
 	/**
+	 *
 	 * Update the specified resource in storage.
 	 *
 	 * @param Request $request
@@ -137,7 +142,64 @@ class EmpleadoController extends Controller {
 	 */
 	public function update(Request $request,$id)
 	{
-
+		dd($request);
+		$input = [
+			'rut' => $request->input('rut'),
+			'nombres' => $request->input('nombres'),
+			'apellido_paterno' => $request->input('apellido_paterno'),
+			'apellido_materno' => $request->input('apellido_materno'),
+			'f_nacimiento' => $request->input('f_nacimiento'),
+			'f_incorporacion' => $request->input('f_incorporacion'),
+			'cargo' => $request->input('cargo'),
+			'titulo' => $request->input('titulo'),
+			'telefono' => $request->input('telefono'),
+			'email' => $request->input('email'),
+			'domicilio' => $request->input('sueldo_base'),
+			'id_afp' => $request->input('id_afp'),
+			'id_aseguradora' => $request->input('id_aseguradora'),
+			'cuenta_bancaria' => $request->input('cuenta_bancaria'),
+		];
+		$rules = [
+			'rut' => 'required|unique:empleados,rut',
+			'nombres' => 'required',
+			'apellido_paterno' => 'required',
+			'apellido_materno' => 'required',
+			'f_nacimiento' => 'required|date',
+			'f_incorporacion' => 'required|date',
+			'cargo' => 'required',
+			'titulo' => 'required',
+			'telefono' => 'required',
+			'email' => 'required|email',
+			'domicilio' => 'required',
+			'id_afp' => 'required|exists:afps,id',
+			'id_aseguradora' => '',
+			'cuenta_bancaria' => 'required',
+		];
+		$validacion = Validator::make($input,$rules);
+		if($validacion->fails()){
+			return redirect()->to('empleados/create')->withInput()->withErrors($validacion->messages());
+		}
+		$empleado = Empleado::find($id);
+		$empleado->setAttribute('rut',$request->input('rut'));
+		$empleado->setAttribute('nombres',$request->input('nombres'));
+		$empleado->setAttribute('apellido_paterno',$request->input('apellido_paterno'));
+		$empleado->setAttribute('apellido_materno',$request->input('apellido_materno'));
+		$empleado->setAttribute('f_nacimiento',$request->input('f_nacimiento'));
+		$empleado->setAttribute('f_incorporacion',$request->input('f_incorporacion'));
+		$empleado->setAttribute('cargo',$request->input('cargo'));
+		$empleado->setAttribute('titulo',$request->input('titulo'));
+		$empleado->setAttribute('telefono',$request->input('telefono'));
+		$empleado->setAttribute('domicilio',$request->input('domicilio'));
+		$empleado->setAttribute('email',$request->input('email'));
+		$empleado->setAttribute('sueldo_base',$request->input('sueldo_base'));
+		$empleado->setAttribute('id_afp',$request->input('id_afp'));
+		$empleado->setAttribute('id_aseguradora',$request->input('id_salud'));
+		$empleado->setAttribute('cuenta_bancaria',$request->input('cuenta_bancaria'));
+		/*$now = date('Y-m-d H:i:s');
+		$empleado->setAttribute('updated_at',$now);*/
+		$empleado->save();
+		Flash::success('Empleado ingresado con exito');
+		return redirect('empleados');
 	}
 
 	/**
