@@ -67,9 +67,10 @@ class AfpController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function edit($id)
+	public function edit($rut)
 	{
-		//
+		$AFP = AFP::find($rut);
+		return view('empleados.edit')->with('empleado',$AFP);
 	}
 
 	/**
@@ -89,9 +90,10 @@ class AfpController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($id)
+	public function destroy($rut)
 	{
-		//
+		$AFP = AFP::find($rut);
+		$AFP->delete();
 	}
 
 }
