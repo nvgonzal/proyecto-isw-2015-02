@@ -81,7 +81,34 @@ class AfpController extends Controller {
 	 */
 	public function update($id)
 	{
-		//
+		dd($request);
+		$input = [
+			'rut' => $request->input('rut'),
+			'nombre' => $request->input('nombre'),
+			'email' => $request->input('email'),
+			'telefono' => $request->input('telefono'),
+			'link' => $request->input('link'),
+		];
+		$rules = [
+			'rut' => 'required|unique:empleados,rut',
+			'nombre' => 'required',
+			'email' => 'required|email',
+			'telefono' => 'required',
+			'link' => 'required|url',
+		];
+		$validacion = Validator::make($input,$rules);
+		if($validacion->fails()){
+			return redirect()->to('AFP/create')->withInput()->withErrors($validacion->messages());
+		}
+		$AFP = Empleado::find($id);
+		$AFP->setAttribute('rut',$request->input('rut'));
+		$AFP->setAttribute('nombre',$request->input('nombre'));
+		$AFP->setAttribute('email',$request->input('email'));
+		$AFP->setAttribute('telefono',$request->input('telefono'));
+		$AFP->setAttribute('link',$request->input('link'));
+		$AFP->save();
+		Flash::success('AFP ingresado con exito');
+		return redirect('AFP');
 	}
 
 	/**
