@@ -7,7 +7,7 @@
         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad">
 
 
-            <div class="panel panel-info">
+            <div class="panel panel-primary">
                 <div class="panel-heading">
                     <h3 class="panel-title">{{$empleado->nombres}} {{$empleado->apellido_paterno}} {{$empleado->apellido_materno}}</h3>
                 </div>
@@ -73,14 +73,14 @@
                                 </tr>
                                 <tr>
                                     <td>Prevision social:</td>
-                                    <td>{{$empleado->id_afp}}</td>
+                                    <td>{{$empleado->AFP->nombre}}</td>
                                 </tr>
                                 <tr>
                                     <td>Prevision de salud:</td>
                                     @if($empleado->id_aseguradora==null)
                                         <td>Empleado no esta afiliada a ninguna ISAPRE</td>
                                     @else
-                                        <td>{{$empleado->id_aseguradora}}</td>
+                                        <td>{{$empleado->Aseguradora->nombre}}</td>
                                     @endif
                                 </tr>
                                 <tr>
