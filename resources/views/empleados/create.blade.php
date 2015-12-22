@@ -39,11 +39,29 @@
         </div>
         <div class="form-group date">
             {!! Form::label('f_nacimiento', 'Fecha Nacimiento',['class'=>'control-label']) !!}
-            {!! Form::text('f_nacimiento',null,['class'=>'form-control datepicker']) !!}
+            {!! Form::text('f_nacimiento',null,['class'=>'form-control datepicker',
+            'data-provide'=>'datepicker',
+            'data-date-format'=>'dd-mm-yyyy',
+            'data-date-language'=>'es',
+            'data-date-autoclose'=>'true',
+            'data-date-today-highlight'=>'true',
+            'data-date-calendar-weeks'=>'true',
+            'data-date-end-date'=>'0d',
+            'data-date-week-start'=>'1',
+            'data-date-today-btn'=>'linked']) !!}
         </div>
         <div class="form-group">
             {!! Form::label('f_incorporacion', 'Fecha Incorporacion',['class'=>'control-label']) !!}
-            {!! Form::text('f_incorporacion',null,['class'=>'form-control datepicker']) !!}
+            {!! Form::text('f_incorporacion',null,['class'=>'form-control datepicker',
+            'data-provide'=>'datepicker',
+            'data-date-format'=>'dd-mm-yyyy',
+            'data-date-language'=>'es',
+            'data-date-autoclose'=>'true',
+            'data-date-today-highlight'=>'true',
+            'data-date-calendar-weeks'=>'true',
+            'data-date-end-date'=>'0d',
+            'data-date-week-start'=>'1',
+            'data-date-today-btn'=>'linked'])!!}
         </div>
         <div class="form-group">
             {!! Form::label('cargo', 'Cargo',['class'=>'control-label']) !!}
@@ -117,14 +135,5 @@
                 validation: true,
                 on_error: function(){ alert('Rut ingresado no valido'); }
             });}
-        $('.datepicker').datepicker({
-            format: "dd-mm-yyyy",
-            weekStart: 1,
-            endDate: "0d",
-            todayBtn: "linked",
-            language: "es",
-            calendarWeeks: true,
-            todayHighlight: true
-        });
     </script>
 @stop
