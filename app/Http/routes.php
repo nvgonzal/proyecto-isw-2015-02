@@ -13,6 +13,8 @@
 
 Route::get('home','HomeController@index');
 
+Route::get('/','Auth\AuthController@getLogin');
+
 Route::get('auth/register', 'Auth\AuthController@getRegister'); // Muestra el formulario para el registro de un usuario
 Route::post('auth/register', 'Auth\AuthController@postRegister'); // Recibe los datos del formulario de registro de usuarios
 Route::get('auth/login', 'Auth\AuthController@getLogin'); // Muestra el formulario para iniciar sesión
@@ -20,4 +22,11 @@ Route::post('auth/login', 'Auth\AuthController@postLogin'); // Recibe los datos 
 Route::get('auth/logout', 'Auth\AuthController@getLogout'); // Ruta para cerrar sesión de usuario
 
 Route::resource('empleados','EmpleadoController');
+Route::get('empleados/{rut}/delete',[
+    'uses' => 'EmpleadoController@destroy',
+    'as' => 'empleados.destroy'
+]);
 
+/*Route::all('{all}',function(){
+
+});*/

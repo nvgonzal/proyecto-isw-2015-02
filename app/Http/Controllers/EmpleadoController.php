@@ -99,9 +99,6 @@ class EmpleadoController extends Controller {
 		$empleado->setAttribute('id_afp',$request->input('id_afp'));
 		$empleado->setAttribute('id_aseguradora',$request->input('id_salud'));
 		$empleado->setAttribute('cuenta_bancaria',$request->input('cuenta_bancaria'));
-		/*$now = date('Y-m-d H:i:s');
-		$empleado->setAttribute('created_at',$now);
-		$empleado->setAttribute('updated_at',$now);*/
 		$exito = $empleado->save();
 		if ($exito) {
 			Flash::success('Empleado ingresado con exito');
@@ -142,13 +139,12 @@ class EmpleadoController extends Controller {
 	 * Update the specified resource in storage.
 	 *
 	 * @param Request $request
-	 * @param  int  $id
+	 * @param  int  $rut
 	 * @return Response
 	 */
-	public function update(Request $request,$id)
+	public function update(Request $request,$rut)
 	{
 		$input = [
-			'rut' => $request->input('rut'),
 			'nombres' => $request->input('nombres'),
 			'apellido_paterno' => $request->input('apellido_paterno'),
 			'apellido_materno' => $request->input('apellido_materno'),
@@ -164,7 +160,6 @@ class EmpleadoController extends Controller {
 			'cuenta_bancaria' => $request->input('cuenta_bancaria'),
 		];
 		$rules = [
-			'rut' => 'required|unique:empleados,rut',
 			'nombres' => 'required',
 			'apellido_paterno' => 'required',
 			'apellido_materno' => 'required',
@@ -177,14 +172,13 @@ class EmpleadoController extends Controller {
 			'domicilio' => 'required',
 			'id_afp' => 'required|exists:afps,id',
 			'id_aseguradora' => '',
-			'cuenta_bancaria' => 'required',
+			'cuenta_bancaria' => '',
 		];
 		$validacion = Validator::make($input,$rules);
 		if($validacion->fails()){
-			return redirect()->to('empleados/create')->withInput()->withErrors($validacion->messages());
+			return redirect()->to('empleados/'.$rut)->withInput()->withErrors($validacion->messages());
 		}
-		$empleado = Empleado::find($id);
-		$empleado->setAttribute('rut',$request->input('rut'));
+		$empleado = Empleado::find($rut);
 		$empleado->setAttribute('nombres',$request->input('nombres'));
 		$empleado->setAttribute('apellido_paterno',$request->input('apellido_paterno'));
 		$empleado->setAttribute('apellido_materno',$request->input('apellido_materno'));
@@ -199,11 +193,14 @@ class EmpleadoController extends Controller {
 		$empleado->setAttribute('id_afp',$request->input('id_afp'));
 		$empleado->setAttribute('id_aseguradora',$request->input('id_salud'));
 		$empleado->setAttribute('cuenta_bancaria',$request->input('cuenta_bancaria'));
-		/*$now = date('Y-m-d H:i:s');
-		$empleado->setAttribute('updated_at',$now);*/
-		$empleado->save();
-		Flash::success('Empleado ingresado con exito');
-		return redirect('empleados');
+		$exito=$empleado->save();
+
+		if ($exito) {
+			Flash::success('Empleado actualizado');
+			return redirect('empleados');
+		} else {
+			Flash::error('Empleado no puedo ser actualizado');
+		}
 	}
 
 	/**
@@ -215,7 +212,15 @@ class EmpleadoController extends Controller {
 	public function destroy($id)
 	{
 		$empleado = Empleado::find($id);
-		$empleado->delete();
+		$exito=$empleado->delete();
+		if($exito){
+			Flash::success('Empleado eliminado con exito');
+			return redirect('empleados');
+		}
+		else{
+			Flash::error('Empleado no pudo ser eliminado');
+			return redirect('empleados');
+		}
 	}
 
 }
