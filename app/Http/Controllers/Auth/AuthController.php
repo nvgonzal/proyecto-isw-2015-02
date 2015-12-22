@@ -36,10 +36,19 @@ class AuthController extends Controller {
 	}
 
 
+	/**
+	 * Funcion que retorna la vista para hacer login
+	 * @return \Illuminate\View\View
+	 */
 	public function getLogin(){
 		return view('auth.login');
 	}
 
+	/**
+	 * Funcion que comprueba las credenciales ingresadas por el usuario
+	 * @param Request $request
+	 * @return $this|\Illuminate\Http\RedirectResponse
+	 */
 	public function postLogin(Request $request)
 	{
 		$this->validate($request, [
@@ -61,6 +70,16 @@ class AuthController extends Controller {
 			]);
 	}
 
+	/**
+	 * Cierra sesión de usuario
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
+	public function getLogout()
+	{
+		$this->auth->logout();
+		return redirect('/');
+	}
 	/**
 	 * Retorna la ruta para redireccionar luego de:
 	 *  - Un registro exitoso de un nuevo usuario
