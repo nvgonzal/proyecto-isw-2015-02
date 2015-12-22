@@ -14,7 +14,7 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-3 col-lg-3 " align="center"><img alt="Foto empleado"
-                                                                            src="http://babyinfoforyou.com/wp-content/uploads/2014/10/avatar-300x300.png"
+                                                                            src="{{URL::to('img/profile.jpg')}}"
                                                                             class="img-circle img-responsive"></div>
 
                         <div class="col-xs-10 col-sm-10 hidden-md hidden-lg"> <br>
@@ -109,7 +109,9 @@
                         <span class="pull-right">
                             <a href="{{URL::to('empleados/'.$empleado->rut.'/edit')}}" data-original-title="Edit this user" data-toggle="tooltip" type="button"
                                class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i></a>
-                            <a data-original-title="Remove this user" data-toggle="tooltip" type="button"
+                            <a href="{{route('empleados.destroy',$empleado->rut)}}" data-original-title="Remove this user" data-toggle="tooltip" type="button"
+                               onclick="alert('¿Seguro que quiere eliminar empleado?' +
+                            '\nPuedes recuperarlo despues');"
                                class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></a>
                         </span>
                 </div>
