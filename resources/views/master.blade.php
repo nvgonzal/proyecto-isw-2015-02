@@ -13,8 +13,10 @@
     </head>
 
     <body>
-        <header>
-            {!! Html::image(URL::to('img/banner.jpg'),'Banner',['class'=>'img-responsive'],null) !!}
+        <header style="background-color: #9e0b37">
+            <div class="container" align="center">
+                {!! Html::image(URL::to('img/banner.jpg'),'Banner',['class'=>'img-responsive'],null) !!}
+            </div>
         </header>
         <nav class="navbar navbar-default">
             <div class="container-fluid">
