@@ -15,3 +15,6 @@ Route::get('home','HomeController@index');
 
 Route::resource('empleados','EmpleadoController');
 
+Route::resource('isapre','IsapreController');
+
+
