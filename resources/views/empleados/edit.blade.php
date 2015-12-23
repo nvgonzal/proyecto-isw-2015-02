@@ -38,13 +38,31 @@
             {!! Form::label('apellido_materno', 'Apellido Materno',['class'=>'control-label']) !!}
             {!! Form::text('apellido_materno', null,['class'=>'form-control','placeholder'=>'Ingrese apellido materno...']) !!}
         </div>
-        <div class="form-group date">
+        <div class="form-group">
             {!! Form::label('f_nacimiento', 'Fecha Nacimiento',['class'=>'control-label']) !!}
-            {!! Form::text('f_nacimiento',null,['class'=>'form-control datepicker']) !!}
+            {!! Form::text('f_nacimiento',null,['class'=>'form-control',
+            'data-provide'=>'datepicker',
+            'data-date-format'=>'dd-mm-yyyy',
+            'data-date-language'=>'es',
+            'data-date-autoclose'=>'true',
+            'data-date-today-highlight'=>'true',
+            'data-date-calendar-weeks'=>'true',
+            'data-date-end-date'=>'0d',
+            'data-date-week-start'=>'1',
+            'data-date-today-btn'=>'linked']) !!}
         </div>
         <div class="form-group">
             {!! Form::label('f_incorporacion', 'Fecha Incorporacion',['class'=>'control-label']) !!}
-            {!! Form::text('f_incorporacion',null,['class'=>'form-control datepicker']) !!}
+            {!! Form::text('f_incorporacion',null,['class'=>'form-control',
+            'data-provide'=>'datepicker',
+            'data-date-format'=>'dd-mm-yyyy',
+            'data-date-language'=>'es',
+            'data-date-autoclose'=>'true',
+            'data-date-today-highlight'=>'true',
+            'data-date-calendar-weeks'=>'true',
+            'data-date-end-date'=>'0d',
+            'data-date-week-start'=>'1',
+            'data-date-today-btn'=>'linked']) !!}
         </div>
         <div class="form-group">
             {!! Form::label('cargo', 'Cargo',['class'=>'control-label']) !!}
