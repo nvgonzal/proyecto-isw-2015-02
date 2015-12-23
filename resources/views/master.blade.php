@@ -21,7 +21,7 @@
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
                     <a class="navbar-brand">
-                        {!! HTML::image(URL::to('img/logo.png'),'logo.png',['class'=>'img-responsive']) !!}
+                        {!! HTML::image(URL::to('img/logo.png'),'logo.png',['class'=>'img-responsive repon']) !!}
                     </a>
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                         <span class="sr-only">Toggle navigation</span>
@@ -57,10 +57,9 @@
                 </span>
             </div>
         </footer>
-        {!! Html::script('js/bootstrap.js') !!}
         {!! Html::script('js/jquery-1.11.3.js') !!}
-        {!! Html::script('js/bootstrap-datepicker.js') !!}
-        {!! Html::script('js/jquery.Rut.js') !!}
+        {!! Html::script('js/bootstrap.js') !!}
+        @yield('javascript')
     </body>
 
 </html>

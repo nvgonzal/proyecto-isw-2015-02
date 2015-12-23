@@ -11,54 +11,39 @@
         <h3>Formulario ingreso de nuevo empleado</h3>
     </div>
     @if($errors->has())
+        <strong>Whoops!</strong> Hubo problemas con tus entradas.<br><br>
         <div class="alert alert-danger">
             @foreach($errors->all() as $error)
                 {!! $error !!}<br>
             @endforeach
         </div>
     @endif
-    <div class="row">
-        {!! Form::open(['route'=>'empleados.store','class'=>'form-horizontal','method'=>'post']) !!}
+    <div class="container">
+        {!! Form::open(['route'=>'empleados.store','class'=>'form-horizontal','method'=>'POST']) !!}
+        <div class="form-group">
+            {!! Form::label('rut','Rut',['class'=>'control-label']) !!}
+            {!! Form::text('rut',null,['class'=>'form-control','placeholder'=>'Ingrese rut sin puntos ni guion',
+            'onfocus'=>'formatear_rut();']) !!}
+        </div>
         <div class="form-group">
             {!! Form::label('nombres','Nombres',['class'=>'control-label']) !!}
-            {!! Form::text('nombres',null,['class'=>'form-control','placehodler'=>'EJ: Nombre empleado']) !!}
+            {!! Form::text('nombres',null,['class'=>'form-control','placeholder'=>'Ingrese nombre de empleado']) !!}
         </div>
         <div class="form-group">
             {!! Form::label('apellido_paterno', 'Apellido Paterno',['class'=>'control-label']) !!}
-            {!! Form::text('apellido_paterno', null,['class'=>'form-control','placeholder'=>'Apellido']) !!}
+            {!! Form::text('apellido_paterno', null,['class'=>'form-control','placeholder'=>'Ingrese apellido paterno...']) !!}
         </div>
         <div class="form-group">
             {!! Form::label('apellido_materno', 'Apellido Materno',['class'=>'control-label']) !!}
-            {!! Form::text('apellido_materno', null,['class'=>'form-control','placeholder'=>'Apellido']) !!}
-        </div>
-        <div class="form-group">
-            {!! Form::label('rut','Rut',['class'=>'control-label']) !!}
-            {!! Form::text('rut',null,['class'=>'form-control','placeholder'=>'EJ: 11.111.111-1']) !!}
+            {!! Form::text('apellido_materno', null,['class'=>'form-control','placeholder'=>'Ingrese apellido materno...']) !!}
         </div>
         <div class="form-group date">
             {!! Form::label('f_nacimiento', 'Fecha Nacimiento',['class'=>'control-label']) !!}
-            {!! Form::text('f_nacimiento',null,['class'=>'form-control','data-provide'=>'datepicker',
-            'data-date-format'=>'dd/mm/yyyy',
-            'data-date-language'=>'es-CL',
-            'data-date-autoclose'=>'true',
-            'data-date-today-highlight'=>'true',
-            'data-date-calendar-weeks'=>'true',
-            'data-date-end-date'=>'0d',
-            'data-date-week-start'=>'1',
-            'data-date-today-btn'=>'linked']) !!}
+            {!! Form::text('f_nacimiento',null,['class'=>'form-control datepicker']) !!}
         </div>
         <div class="form-group">
             {!! Form::label('f_incorporacion', 'Fecha Incorporacion',['class'=>'control-label']) !!}
-            {!! Form::text('f_incorporacion',null,['class'=>'form-control',
-            'data-provide'=>'datepicker',
-            'data-date-format'=>'dd/mm/yyyy',
-            'data-date-language'=>'es-CL',
-            'data-date-autoclose'=>'true',
-            'data-date-today-highlight'=>'true',
-            'data-date-calendar-weeks'=>'true',
-            'data-date-end-date'=>'0d',
-            'data-date-week-start'=>'1',
-            'data-date-today-btn'=>'linked']) !!}
+            {!! Form::text('f_incorporacion',null,['class'=>'form-control datepicker']) !!}
         </div>
         <div class="form-group">
             {!! Form::label('cargo', 'Cargo',['class'=>'control-label']) !!}
@@ -69,22 +54,22 @@
         </div>
         <div class="form-group has-feedback">
             {!! Form::label('titulo','Titulo',['class'=>'control-label']) !!}
-            {!! Form::text('titulo',null,['class'=>'form-control','placeholder'=>'EJ: ']) !!}
+            {!! Form::text('titulo',null,['class'=>'form-control','placeholder'=>'Ingrese titulo universitario...']) !!}
             <span class=" glyphicon glyphicon-education form-control-feedback"></span>
         </div>
         <div class="form-group has-feedback">
             {!! Form::label('domicilio','Domicilio',['class'=>'control-label']) !!}
-            {!! Form::text('domicilio',null,['class'=>'form-control']) !!}
+            {!! Form::text('domicilio',null,['class'=>'form-control','placeholder'=>'Ingrese direccion del domicilio']) !!}
             <span class=" glyphicon glyphicon-home form-control-feedback"></span>
         </div>
         <div class="form-group has-feedback">
             {!! Form::label('telefono', 'Telefono',['class'=>'control-label']) !!}
-            {!! Form::text('telefono', null,['class'=>'form-control']) !!}
+            {!! Form::text('telefono', null,['class'=>'form-control','placeholder'=>'Ingrese numero de telefono...']) !!}
             <span class=" glyphicon glyphicon-earphone form-control-feedback"></span>
         </div>
         <div class="form-group has-feedback">
             {!! Form::label('email', 'Correo Electronico',['class'=>'control-label']) !!}
-            {!! Form::text('email', null,['class'=>'form-control']) !!}
+            {!! Form::text('email', null,['class'=>'form-control','placeholder'=>'Ingrese correo electronico...']) !!}
             <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
         </div>
         <div class="form-group">
@@ -106,19 +91,40 @@
         </div>
         <div class="form-group">
             {!! Form::label('cuenta_bancaria', 'Cuenta Bancaria',['class'=>'control-label']) !!}
-            {!! Form::text('cuenta_bancaria', null,['class'=>'form-control']) !!}
+            {!! Form::text('cuenta_bancaria', null,['class'=>'form-control','placeholder'=>'Ingrese cuenta bancaria del empleado (opcional)']) !!}
         </div>
         <div class="form-group">
             {!! Form::label('sueldo_base', 'Sueldo Base',['class'=>'control-label']) !!}
-            {!! Form::text('sueldo_base', null,['class'=>'form-control']) !!}
+            {!! Form::text('sueldo_base', null,['class'=>'form-control','placeholder'=>'Ingrese suledo base del empleado...']) !!}
         </div>
         <br/>
 
-        {!! Form::submit('Ingresar empleado',['class'=>'btn btn-default']) !!}
+        {!! Form::submit('Ingresar empleado',['class'=>'btn btn-success']) !!}
 
         {!! Form::close() !!}
     </div>
     <br>
     <br>
     <br>
-@endsection
+@stop
+
+@section('javascript')
+    {!! Html::script('js/bootstrap-datepicker.js') !!}
+    {!! Html::script('js/jquery.Rut.js') !!}
+    <script>
+        function formatear_rut(){
+            $("#rut").Rut({
+                validation: true,
+                on_error: function(){ alert('Rut ingresado no valido'); }
+            });}
+        $('.datepicker').datepicker({
+            format: "dd-mm-yyyy",
+            weekStart: 1,
+            endDate: "0d",
+            todayBtn: "linked",
+            language: "es",
+            calendarWeeks: true,
+            todayHighlight: true
+        });
+    </script>
+@stop

@@ -198,7 +198,7 @@ return [
 		'View'      => 'Illuminate\Support\Facades\View',
 		'Form' => 'Collective\Html\FormFacade',
 		'Html' => 'Collective\Html\HtmlFacade',
-		'Debugbar' => 'Barryvdh\Debugbar\Facade::class,',
+		'Debugbar' => 'Barryvdh\Debugbar\Facade',
 		'Flash' => 'Laracasts\Flash\Flash',
 
 	],

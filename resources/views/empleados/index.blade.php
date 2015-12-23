@@ -30,15 +30,16 @@
                     <td>{{$empleado->cargo}}</td>
                     <td>
                         <a class="btn btn-primary btn-sm" data-toggle="tooltip" title="Informacion detallada"
-                           href="{!! URL::to('empleados/'.$empleado->rut) !!}">
+                           href="{{ URL::to('empleados/'.$empleado->rut) }}">
                             <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
                         </a>
                         <a class="btn btn-warning btn-sm" data-toggle="tooltip" title="Editar informacion"
-                           href="{!! URL::to('empleados/'.$empleado->rut.'/edit') !!}">
+                           href="{{ URL::to('empleados/'.$empleado->rut.'/edit') }}">
                             <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                         </a>
                         <a class="btn btn-danger btn-sm" data-toggle="tooltip" title="Eliminar empleado"
-                           href="#">
+                           href="{{ route('empleados.destroy',$empleado->rut) }}" onclick="alert('¿Seguro que quiere eliminar empleado?' +
+                            '\nPuedes recuperarlo despues');">
                             <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                         </a>
                     </td>
