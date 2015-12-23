@@ -11,11 +11,13 @@
         <h3>Formulario ingreso de nuevo empleado</h3>
     </div>
     @if($errors->has())
-        <strong>Whoops!</strong> Hubo problemas con tus entradas.<br><br>
         <div class="alert alert-danger">
-            @foreach($errors->all() as $error)
-                {!! $error !!}<br>
-            @endforeach
+            <strong>Whoops!</strong> Hubo problemas con tus entradas.<br><br>
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
         </div>
     @endif
     <div class="container">

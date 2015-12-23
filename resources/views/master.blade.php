@@ -43,6 +43,7 @@
                     </ul>
                     <!--Barra para buscar-->
                     <ul class="nav navbar-nav navbar-right">
+                        <li><a href="{{URL::to('auth/register')}}">Registrar cuenta</a></li>
                         <li><a href="#">Cerrar sesion</a></li>
                     </ul>
                 </div><!-- /.navbar-collapse -->

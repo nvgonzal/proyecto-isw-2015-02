@@ -1,15 +1,17 @@
-@extends('app')
+@extends('master')
 
-@section('content')
+@section('titulo','Registrar empleado')
+
+@section('contenido')
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2">
-			<div class="panel panel-default">
-				<div class="panel-heading">Register</div>
+			<div class="panel panel-success">
+				<div class="panel-heading">Registrar cuenta</div>
 				<div class="panel-body">
 					@if (count($errors) > 0)
 						<div class="alert alert-danger">
-							<strong>Whoops!</strong> There were some problems with your input.<br><br>
+							<strong>Whoops!</strong> Hay errores en tus entradas.<br><br>
 							<ul>
 								@foreach ($errors->all() as $error)
 									<li>{{ $error }}</li>
@@ -17,49 +19,43 @@
 							</ul>
 						</div>
 					@endif
-
-					<form class="form-horizontal" role="form" method="POST" action="{{ url('/auth/register') }}">
+					{!! Form::open(['route'=>'auth.register.post','class'=>'form-horizontal ','method'=>'POST']) !!}
 						<input type="hidden" name="_token" value="{{ csrf_token() }}">
-
 						<div class="form-group">
-							<label class="col-md-4 control-label">Name</label>
+							{!! Form::label('rut','Rut',['class'=>'col-md-4 control-label']) !!}
 							<div class="col-md-6">
-								<input type="text" class="form-control" name="name" value="{{ old('name') }}">
+								<select class="form-control" id="rut" name="rut">
+									@foreach(\App\Empleado::all() as $empleado)
+										@if($empleado->id_cuenta==null)
+											<option value="{{$empleado->rut}}">{{$empleado->nombres}} {{$empleado->apellido_paterno}}
+												{{$empleado->apellido_materno}}</option>
+										@endif
+									@endforeach
+								</select>
 							</div>
 						</div>
-
 						<div class="form-group">
-							<label class="col-md-4 control-label">E-Mail Address</label>
+							{!! Form::label('password','Contraseña',['class'=>'col-md-4 control-label']) !!}
 							<div class="col-md-6">
-								<input type="email" class="form-control" name="email" value="{{ old('email') }}">
+								{!! Form::password('password',['class'=>'form-control']) !!}
 							</div>
 						</div>
-
 						<div class="form-group">
-							<label class="col-md-4 control-label">Password</label>
+							{!! Form::label('password_confirmation','Confirme contraseña',['class'=>'col-md-4 control-label']) !!}
 							<div class="col-md-6">
-								<input type="password" class="form-control" name="password">
-							</div>
-						</div>
-
-						<div class="form-group">
-							<label class="col-md-4 control-label">Confirm Password</label>
-							<div class="col-md-6">
-								<input type="password" class="form-control" name="password_confirmation">
+								{!! Form::password('password_confirmation',['class'=>'form-control']) !!}
 							</div>
 						</div>
 
 						<div class="form-group">
 							<div class="col-md-6 col-md-offset-4">
-								<button type="submit" class="btn btn-primary">
-									Register
-								</button>
+								{!! Form::submit('Registrar',['class'=>'btn btn-primary']) !!}
 							</div>
 						</div>
-					</form>
+					{!! Form::close() !!}
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
-@endsection
+@stop

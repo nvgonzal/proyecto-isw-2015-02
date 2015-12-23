@@ -12,10 +12,14 @@
         <h3>Formulario edicion empleado {{$empleado->nombres}} {{$empleado->apellido_paterno}} {{$empleado->apellido_materno}}</h3>
     </div>
     @if($errors->has())
-        <strong>Whoops!</strong> Hubo problemas con tus entradas.<br><br>
         <div class="alert alert-danger">
-            @foreach($errors->all() as $error)
-                {!! $error !!}<br>
+            <strong>Whoops!</strong> Hubo problemas con tus entradas.<br><br>
+        @foreach($errors->all() as $error)
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
             @endforeach
         </div>
     @endif
@@ -129,21 +133,4 @@
 
 @section('javascript')
     {!! Html::script('js/bootstrap-datepicker.js') !!}
-    {!! Html::script('js/jquery.Rut.js') !!}
-    <script>
-        function formatear_rut(){
-            $("#rut").Rut({
-                validation: true,
-                on_error: function(){ alert('Rut ingresado no valido'); }
-            });}
-        $('.datepicker').datepicker({
-            format: "dd-mm-yyyy",
-            weekStart: 1,
-            endDate: "0d",
-            todayBtn: "linked",
-            language: "es",
-            calendarWeeks: true,
-            todayHighlight: true
-        });
-    </script>
 @stop

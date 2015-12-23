@@ -3,8 +3,12 @@
 @section('titulo','Informacion empleados')
 
 @section('contenido')
-    <a class="btn btn-success boton-fixed btn-lg" data-toggle="tooltip" title="Agregar empleado"
+    <a class="btn btn-success boton-fixed btn-lg hidden-sm hidden-xs" data-toggle="tooltip" title="Agregar empleado"
                href="{!! URL::to('empleados/create') !!}">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+    </a>
+    <a class="btn btn-success boton-fixed btn-sm hidden-lg hidden-md" data-toggle="tooltip" title="Agregar empleado"
+       href="{!! URL::to('empleados/create') !!}">
         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
     </a>
     <div class="container">

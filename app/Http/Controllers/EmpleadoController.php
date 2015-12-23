@@ -3,7 +3,6 @@
 use App\Http\Requests;
 use App\Empleado;
 
-use Freshwork\ChileanBundle\Facades\Rut;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Laracasts\Flash\Flash;
@@ -19,7 +18,6 @@ class EmpleadoController extends Controller {
 	{
 		//
 		$empleados = Empleado::paginate(20);
-
 		return view('empleados.index')->with('empleados',$empleados);
 	}
 

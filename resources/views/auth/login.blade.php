@@ -52,25 +52,14 @@
             font-size: 16px;
         }
     </style>
-    <script type="text/javascript">
-        function cambiar_color(elemento,color){
-            elemento.style.background=color;
-        }
-
-        function formatear_rut(){
-            $("#rut").Rut({
-                validation: false
-            });
-        }
-    </script>
 
 </head>
 
 <body>
 <div class='div_login' align='center'>
-    <form id="form" method="post" action="autentificar_usuario.php" >
+    <form id="form" method="post" action="{{URL::to('/auth/login')}}" >
         <table class='tabla_login' cellspacing='5px'>
-
+            <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <td><input type='text' id='rut' class='input_login' required='required' maxlength='12' placeholder='Rut' onfocus="formatear_rut();"></td>
             </tr>
             <tr>
@@ -89,6 +78,18 @@
 </div>
 {!! Html::script('js/bootstrap.js') !!}
 {!! Html::script('js/jquery-1.11.3.js') !!}
+{!! Html::script('js/jquery.Rut.js') !!}
+<script type="text/javascript">
+    function cambiar_color(elemento,color){
+        elemento.style.background=color;
+    }
+
+    function formatear_rut(){
+        $("#rut").Rut({
+            validation: true
+        });
+    }
+</script>
 </body>
 
 </html>
