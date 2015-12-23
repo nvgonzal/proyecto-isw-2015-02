@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers;
 
+use App\Aseguradora;
 use App\Http\Requests;
 use App\Empleado;
 
@@ -199,6 +200,7 @@ class EmpleadoController extends Controller {
 		} else {
 			Flash::error('Empleado no puedo ser actualizado');
 		}
+
 	}
 
 	/**

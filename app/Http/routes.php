@@ -31,6 +31,6 @@ Route::get('empleados/{rut}/delete',[
     'as' => 'empleados.destroy'
 ]);
 
-/*Route::all('{all}',function(){
+Route::resource('isapre','IsapreController');
 
-});*/
+Route::resource('apf','AfpController');
