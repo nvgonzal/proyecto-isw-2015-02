@@ -39,6 +39,24 @@ class IsapreController extends Controller {
 	public function store(Request $request)
 	{
 		//
+		$input = [
+			'Rut Institucion' => $request->input('Rut Institucion'),
+			'Nombre Isapre' => $request->input('Nombre Isapre'),
+			'Telefono' => $request->input('Telefono'),
+			'E-mail' => $request->input('E-mail'),
+			'Link' => $request->input('Link'),
+		];
+		$rules = [
+			'Rut Institucion' => 'required|unique:empleados','Rut Institucion',
+			'Nombre Isapre' => 'required',
+			'Telefono' => 'required|Telefono',
+			'E-mail' => 'required',
+			'link' => 'required|url',
+		];
+		$validacion = Validator::make($input,$rules);
+		if($validacion->fails()){
+			return redirect()->to('isapre/create')->withInput()->withErrors($validacion->messages());
+		}
 		$isapre = new isapre();
 		dd($request);
 		$isapre->setAttribute('Rut Institucion',$request->input('Rut Institucion'));
@@ -118,7 +136,7 @@ class IsapreController extends Controller {
 		Flash::success('ingresado con exito');
 		return redirect('isapre');
  	}
-	}
+
 	/**
 	 * Remove the specified resource from storage.
 	 *
@@ -127,10 +145,17 @@ class IsapreController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		{
-			$isapre = Isapre::find($id);
-			$isapre->destroy();
-		}
+			$isapre = isapre::find($id);
+			$exito=$isapre->delete();
+			if($exito){
+				Flash::success(' eliminada con exito');
+				return redirect('isapre');
+			}
+			else{
+				Flash::error('no fue eliminada');
+				return redirect('isapre');
+			}
+
 
 	}
 
