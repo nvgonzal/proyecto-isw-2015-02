@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers;
 
+use App\Aseguradora;
 use App\Http\Requests;
 use App\Empleado;
 
@@ -83,7 +84,8 @@ class EmpleadoController extends Controller {
 	 */
 	public function edit($id)
 	{
-		//
+		$isapre = Aseguradora::find($id);
+		return redirect('isapre.edit.editar')->with('isapre',$isapre);
 	}
 
 	/**
@@ -94,7 +96,9 @@ class EmpleadoController extends Controller {
 	 */
 	public function update($id)
 	{
-		//
+
+
+
 	}
 
 	/**
