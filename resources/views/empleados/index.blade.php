@@ -14,14 +14,14 @@
     <div class="container">
         <table class="table table-striped">
             <thead>
-            <th>Rut</th>
-            <th>Nombres</th>
-            <th>Apellido Paterno</th>
-            <th>Apellido Materno</th>
-            <th>Telefono</th>
-            <th>Email</th>
-            <th>Cargo</th>
-            <th>Acciones</th>
+                <th>Rut</th>
+                <th>Nombres</th>
+                <th>Apellido Paterno</th>
+                <th>Apellido Materno</th>
+                <th>Telefono</th>
+                <th>Email</th>
+                <th>Cargo</th>
+                <th>Acciones</th>
             </thead>
             @foreach($empleados as $empleado)
                 <tr>
