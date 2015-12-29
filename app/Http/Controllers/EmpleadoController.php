@@ -1,6 +1,5 @@
 <?php namespace App\Http\Controllers;
 
-use App\Aseguradora;
 use App\Http\Requests;
 use App\Empleado;
 
@@ -10,6 +9,11 @@ use Laracasts\Flash\Flash;
 
 class EmpleadoController extends Controller {
 
+	public function __construct(){
+		// Para toda petición a alguna función de este Controlador, primero se ejecutará el Middleware que
+		// verifica que el usuario ha iniciado sesión
+		$this->middleware('auth');
+	}
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -41,7 +45,6 @@ class EmpleadoController extends Controller {
 	 */
 	public function store(Request $request)
 	{
-		//dd($request);
 		$input = [
 			'rut' => $request->input('rut'),
 			'nombres' => $request->input('nombres'),
