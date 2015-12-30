@@ -16,7 +16,7 @@ class Registrar implements RegistrarContract {
 	public function validator(array $data)
 	{
 		return Validator::make($data, [
-			'rut' => 'required|max:12',
+			'rut' => 'required|max:12|min:11',
 			'password' => 'required|confirmed|min:6',
 		]);
 	}
@@ -29,10 +29,14 @@ class Registrar implements RegistrarContract {
 	 */
 	public function create(array $data)
 	{
-		return Cuenta::create([
-			'rut' => $data['rut'],
-			'password' => bcrypt($data['password']),
-		]);
+		$cuenta= new Cuenta();
+		$cuenta->setAttribute('rut',$data['rut']);
+		$cuenta->setAttribute('password',bcrypt($data['password']));
+		$cuenta->save();
+		$empleado=Empleado::find($data['rut']);
+		$empleado->setAttribute('id_cuenta',$cuenta->id);
+		$empleado->save();
+		return $cuenta;
 	}
 
 }
