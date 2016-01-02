@@ -12,9 +12,9 @@
     </div>
     @if($errors->has())
         <div class="alert alert-danger">
-            <strong>Whoops!</strong> Hubo problemas con tus entradas.<br><br>
             <ul>
-                @foreach ($errors->all() as $error)
+                <strong>Whoops!</strong> Hubo problemas con tus entradas.<br><br>
+            @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>
                 @endforeach
             </ul>
