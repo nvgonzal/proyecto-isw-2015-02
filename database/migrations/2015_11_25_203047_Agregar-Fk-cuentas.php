@@ -15,7 +15,8 @@ class AgregarFkCuentas extends Migration {
 		Schema::table('cuentas', function(Blueprint $table)
 		{
 			//
-			$table->foreign('rut')->references('rut')->on('empleados');
+			$table->foreign('rut')->references('rut')->on('empleados')
+				->onupdate('cascade')->ondelete('cascade');
 		});
 	}
 

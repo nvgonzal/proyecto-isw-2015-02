@@ -27,7 +27,8 @@ class CreateTableCargas extends Migration {
 			//Definicion clave primaria
 			$table->primary('rut');
 			//Definicion claves foraneas
-			$table->foreign('rut_empleado')->references('rut')->on('empleados');
+			$table->foreign('rut_empleado')->references('rut')->on('empleados')
+				->ondelete('cascade')->onupdate('cascade');
 		});
 	}
 

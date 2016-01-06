@@ -15,6 +15,7 @@ class CreateTableAseguradorasDeSalud extends Migration {
 		Schema::create('salud', function(Blueprint $table)
 		{
 			$table->increments('id');
+			$table->string('rut',14)->unique();
 			$table->string('nombre',40);
 			$table->string('telefono',35);
 			$table->string('email',50);

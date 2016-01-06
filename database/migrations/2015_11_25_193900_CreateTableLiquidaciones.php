@@ -26,7 +26,8 @@ class CreateTableLiquidaciones extends Migration {
 			$table->timestamps();
 			$table->softDeletes();
 			//Claves foraneas
-			$table->foreign('rut_empleado')->references('rut')->on('empleados');
+			$table->foreign('rut_empleado')->references('rut')->on('empleados')
+				->onupdate('cascade')->ondelete('cascade');
 		});
 	}
 

@@ -16,16 +16,17 @@ class CreateTableEmpleados extends Migration {
 		{
 			$table->string('rut',12);
 			$table->string('nombres',30);
-			$table->string('apellido_paterno',30);
-			$table->string('apellido_materno',30);
+			$table->string('apellido_paterno',40);
+			$table->string('apellido_materno',40);
 			$table->date('f_nacimiento');
 			$table->date('f_incorporacion');
 			$table->string('cargo');
             $table->string('titulo');
 			$table->string('telefono',35);
 			$table->string('email',30);
-			$table->string('domicilio',50);
+			$table->string('domicilio');
             $table->float('sueldo_base');
+			$table->string('cuenta_bancaria')->nullable();
             $table->integer('id_afp')->unsigned();//Poner esta funcion es necesario para usarlas como claves foraneas
             $table->integer('id_aseguradora')->unsigned()->nullable();
             $table->integer('id_cuenta')->unsigned()->nullable();
