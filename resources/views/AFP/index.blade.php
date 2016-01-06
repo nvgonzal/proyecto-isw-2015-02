@@ -24,7 +24,7 @@
                 <td>
                     </a>
                     <a class="btn btn-warning btn-sm" data-toggle="tooltip" title="Editar informacion"
-                       href="{{ URL::to('afp/'.$AFP->rut.'/edit') }}">
+                       href="{{ URL::to('afp/'.$AFP->id.'/edit') }}">
                         <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                     </a>
                     <a class="btn btn-danger btn-sm" data-toggle="tooltip" title="Eliminar AFP"
