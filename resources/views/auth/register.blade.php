@@ -35,13 +35,13 @@
 							</div>
 						</div>
 						<div class="form-group">
-							{!! Form::label('password','Contraseña',['class'=>'col-md-4 control-label']) !!}
+							{!! Form::label('contraseña','Contraseña',['class'=>'col-md-4 control-label']) !!}
 							<div class="col-md-6">
 								{!! Form::password('password',['class'=>'form-control']) !!}
 							</div>
 						</div>
 						<div class="form-group">
-							{!! Form::label('password_confirmation','Confirme contraseña',['class'=>'col-md-4 control-label']) !!}
+							{!! Form::label('contraseña_confirmation','Confirme contraseña',['class'=>'col-md-4 control-label']) !!}
 							<div class="col-md-6">
 								{!! Form::password('password_confirmation',['class'=>'form-control']) !!}
 							</div>
