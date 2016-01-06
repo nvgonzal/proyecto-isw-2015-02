@@ -29,7 +29,7 @@ class AgregarFkCuentas extends Migration {
 		Schema::table('cuentas', function(Blueprint $table)
 		{
 			//
-            $table->dropForeign('cuentas_rut_fkey');
+            $table->dropForeign('cuentas_rut_foreign');
 		});
 	}
 
