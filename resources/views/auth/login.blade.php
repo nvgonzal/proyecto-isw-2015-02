@@ -13,7 +13,7 @@
                             <div class="form-group">
                                 {!! Form::label('rut','Rut',['class'=>'control-label']) !!}
                                 {!! Form::text('rut',null,['class'=>'form-control'
-                                ,'placeholder'=>'Ingrese RUT sin puntos ni guion']) !!}
+                                ,'placeholder'=>'Ingrese RUT sin puntos ni guion','onfocus'=>'formatear_rut();']) !!}
                             </div>
                             <div class="form-group">
                                 {!! Form::label('password','Contraseña',['class'=>'control-label']) !!}
@@ -38,7 +38,8 @@
     <script type="text/javascript">
     function formatear_rut(){
     $("#rut").Rut({
-            validation: true
+            validation: true,
+            on_error: function(){ alert('Rut ingresado no valido'); }
             });
         }
     </script>
