@@ -29,7 +29,8 @@ class CreateTableEmpleados extends Migration {
 			$table->string('cuenta_bancaria')->nullable();
             $table->integer('id_afp')->unsigned();//Poner esta funcion es necesario para usarlas como claves foraneas
             $table->integer('id_aseguradora')->unsigned()->nullable();
-            $table->integer('id_cuenta')->unsigned()->nullable();
+			$table->integer('id_cuenta')->unsigned()->nullable();
+			$table->float('costo_plan_salud')->nullable();
 			$table->timestamps();
 			$table->softDeletes();
             //Se define la clave primaria

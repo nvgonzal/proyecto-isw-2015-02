@@ -24,7 +24,7 @@ class CreateTableAsistencias extends Migration {
             $table->softDeletes();
             //claves foraneas
             $table->foreign('rut_empleado')->references('rut')->on('empleados')
-				->onupdate('cascade')->ondelete('cascade');
+				->onUpdate('cascade')->onDelete('cascade');
 		});
 	}
 

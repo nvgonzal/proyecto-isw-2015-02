@@ -27,7 +27,7 @@ class CreateTableLiquidaciones extends Migration {
 			$table->softDeletes();
 			//Claves foraneas
 			$table->foreign('rut_empleado')->references('rut')->on('empleados')
-				->onupdate('cascade')->ondelete('cascade');
+				->onUpdate('cascade')->onDelete('cascade');
 		});
 	}
 

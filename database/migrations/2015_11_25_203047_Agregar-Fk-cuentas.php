@@ -16,7 +16,7 @@ class AgregarFkCuentas extends Migration {
 		{
 			//
 			$table->foreign('rut')->references('rut')->on('empleados')
-				->onupdate('cascade')->ondelete('cascade');
+				->onUpdate('cascade')->onDelete('cascade');
 		});
 	}
 
