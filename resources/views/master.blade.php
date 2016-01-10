@@ -38,9 +38,12 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <li class="dropdown">
-                            <a href="{!! Url::to('empleados') !!}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Empleados<span class="caret"></span></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                               role="button" aria-haspopup="true" aria-expanded="false">Empleados
+                                <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">Empleados desvinculados</a></li>
+                                <li><a href="{{URL::to('empleados')}}">Empleados activos</a></li>
+                                <li><a href="{{URL::to('empleados/desvinculados')}}">Empleados desvinculados</a></li>
                             </ul>
                         </li>
                         <li><a href="{!! Url::to('asistencia') !!}">Asistencia</a></li>
@@ -66,6 +69,8 @@
                                     <li><a href="{{ URL::to('auth/logout') }}">Cerrar Sesión</a></li>
                                 </ul>
                             </li>
+                            @else
+                            <li><a>Modo de pruebas</a></li>
                         @endif
                     </ul>
                 </div><!-- /.navbar-collapse -->
@@ -75,12 +80,10 @@
             @include('flash::message')
             @yield('contenido')
         </div>
-       <footer class="panel-footer">
-            <div class="text-center">
-                <span class="text-info">
-                    <h4>Pagina creada para el ramo de ingenieria de software</h4>
-                </span>
-            </div>
+       <footer class="footer">
+           <div class="text-center">
+               <h4>Pagina creada para el ramo de ingenieria de software</h4>
+           </div>
         </footer>
         {!! Html::script('js/jquery-1.11.3.js') !!}
         {!! Html::script('js/bootstrap.js') !!}
