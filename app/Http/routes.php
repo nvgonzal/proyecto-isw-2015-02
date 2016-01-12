@@ -11,36 +11,65 @@
 |
 */
 
+//Ruta para mostrar pagina principal
 Route::get('home','HomeController@index');
 
+//Ruta para mostrar formulario de login
 Route::get('/','Auth\AuthController@getLogin');
 
-Route::get('auth/register', 'Auth\AuthController@getRegister'); // Muestra el formulario para el registro de un usuario
+// Muestra el formulario para el registro de un usuario
+Route::get('auth/register', 'Auth\AuthController@getRegister');
 
+// Recibe los datos del formulario de registro de usuarios
 Route::post('auth/register',[
     'uses' =>'Auth\AuthController@postRegister',
     'as' => 'auth.register.post'
-]); // Recibe los datos del formulario de registro de usuarios
+]);
 
-Route::get('auth/login', 'Auth\AuthController@getLogin'); // Muestra el formulario para iniciar sesión
+// Muestra el formulario para iniciar sesion
+Route::get('auth/login', 'Auth\AuthController@getLogin');
 
+// Recibe los datos para iniciar sesion
 Route::post('auth/login', [
     'uses'=>'Auth\AuthController@postLogin',
     'as' => 'auth.login.post'
-]); // Recibe los datos para iniciar sesión
-Route::get('auth/logout', 'Auth\AuthController@getLogout'); // Ruta para cerrar sesión de usuario
+]);
 
+// Ruta para cerrar sesiï¿½n de usuario
+Route::get('auth/logout', 'Auth\AuthController@getLogout');
+
+//Ruta para formulario de reseteo de contraseÃ±a
+Route::get('reset/form', 'Auth\PasswordController@getEmail');
+
+//Ruta para enviar formulario de reseteo contraseÃ±a
+Route::post('password/email',[
+    'uses' => 'Auth\PasswordController@postEmail',
+    'as' => 'password.email'
+]);
+
+//Ruta para obetener los empleados desvinculados
+Route::get('empleados/desvinculados',[
+    'uses' => 'EmpleadoController@indexDesvinculados',
+    'as' => 'empleados.indexDesvincualdos'
+]);
+
+//Ruta para crud de gestion de empelados
 Route::resource('empleados','EmpleadoController');
 
+//Ruta para eliminar empleado
 Route::get('empleados/{rut}/delete',[
     'uses' => 'EmpleadoController@destroy',
     'as' => 'empleados.destroy'
 ]);
 
-Route::resource('isapre','IsapreController');
+//Ruta para crud de gestion isapres
+Route::resource('isapres','IsapreController');
 
+//Ruta para crud de gestion de afps
 Route::resource('afp','AfpController');
 
+
+//Rutas para manejar rutas fuera de
 Route::any('{all}', function(){
     return view('errors.404');
 })->where('all', '.*');
