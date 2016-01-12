@@ -7,21 +7,20 @@
     <meta name="description" content="Pagina creada para el ramo de ingenieria de software">
     {!! Html::style('css/bootstrap.css') !!}
     {!! Html::style('css/estilo.css') !!}
+    @yield('estilos')
     <title> @yield('titulo') | Colegio Alba</title>
 </head>
 
 <body>
     <header style="background-color: #9e0b37">
         <div class="container" align="center">
-            {!! Html::image(URL::to('img/banner.jpg'),'Banner',['class'=>'img-responsive'],null) !!}
+            {!! Html::image('img/banner.jpg','Banner',['class'=>'img-responsive'],null) !!}
         </div>
     </header>
     @yield('contenido')
-    <footer class="panel-footer">
+    <footer class="footer">
         <div class="text-center">
-            <span class="text-info">
-                <h4>Pagina creada para el ramo de ingenieria de software</h4>
-            </span>
+            <h4>Pagina creada para el ramo de ingenieria de software</h4>
         </div>
     </footer>
     {!! Html::script('js/bootstrap.js') !!}
