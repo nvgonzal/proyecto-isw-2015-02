@@ -13,7 +13,7 @@
     @if($errors->has())
         <div class="alert alert-danger">
             <ul>
-                <strong>Whoops!</strong> Hubo problemas con tus entradas.<br><br>
+                <strong>Whoops!</strong> Hubo problemas con tus entradas.
             @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>
                 @endforeach
