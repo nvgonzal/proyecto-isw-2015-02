@@ -40,9 +40,12 @@ class CreateTableEmpleados extends Migration {
              * Primero el atributo que sea la clave foranea, segundo la clave primaria de la otra tabla,
              * y por ultimo de que tabla se hace referencia
             */
-            $table->foreign('id_afp')->references('id')->on('afps');
-            $table->foreign('id_aseguradora')->references('id')->on('salud');
-            $table->foreign('id_cuenta')->references('id')->on('cuentas');
+            $table->foreign('id_afp')->references('id')->on('afps')
+				->onUpdate('cascade')->onDelete('restrict');
+            $table->foreign('id_aseguradora')->references('id')->on('salud')
+				->onUpdate('cascade')->onDelete('restrict');
+            $table->foreign('id_cuenta')->references('id')->on('cuentas')
+				->onUpdate('cascade')->onDelete('set null');
 		});
 	}
 
