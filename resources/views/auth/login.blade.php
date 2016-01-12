@@ -9,6 +9,16 @@
                 <div class="panel panel-primary">
                     <div class="panel-heading"><h3 class="panel-title"><strong>Iniciar sesion </strong></h3></div>
                     <div class="panel-body">
+                        @if (count($errors) > 0)
+                            <div class="alert alert-danger">
+                                <strong>Whoops!</strong> Hay errores en tus datos<br><br>
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                         {!! Form::open(['route'=>'auth.login.post','method'=>'POST']) !!}
                             <div class="form-group">
                                 {!! Form::label('rut','Rut',['class'=>'control-label']) !!}
@@ -20,17 +30,14 @@
                                 {!! Form::password('password',['class'=>'form-control'
                                 ,'placeholder'=>'Contraseña']) !!}
                             </div>
-                            {!! Form::submit('Ingresar',['class'=>'btn btn-success']) !!}
+                            {!! Form::submit('Ingresar',['class'=>'btn btn-success col-md-6 col-md-offset-3']) !!}
                         {!! Form::close() !!}
                     </div>
-                    <div class="panel-footer"><a href="#"><strong>¿Olvidaste tu contraseña?</strong></a></div>
+                    <div class="panel-footer"><a href="{{URL::to('reset/form')}}"><strong>¿Olvidaste tu contraseña?</strong></a></div>
                 </div>
             </div>
         </div>
     </div>
-    @for($i=1;$i<=5;$i++)
-        <br>
-    @endfor
 @stop
 
 @section('javascript')
