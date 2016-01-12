@@ -9,7 +9,5 @@
             <h4>Para cualquier consulta, contacte con el administrador de sistema</h4>
         </div>
     </div>
-    @for($i=1;$i<=8;$i++)
-        <br>
-    @endfor
+
 @endsection
