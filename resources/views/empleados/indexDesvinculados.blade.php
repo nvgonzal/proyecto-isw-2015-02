@@ -13,6 +13,7 @@
             <th>Telefono</th>
             <th>Email</th>
             <th>Cargo</th>
+            <th>Fecha Desvinculacion</th>
             <th>Acciones</th>
             </thead>
             @foreach($empleados as $empleado)
@@ -24,17 +25,18 @@
                     <td>{{$empleado->telefono}}</td>
                     <td>{{$empleado->email}}</td>
                     <td>{{$empleado->cargo}}</td>
+                    <td>{{$empleado->deleted_at}}</td>
                     <td>
                         <a class="btn btn-primary btn-sm" data-toggle="tooltip" title="Informacion detallada"
                            href="{{URL::to('empleados/'.$empleado->rut)}}">
                             <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
                         </a>
                         <a class="btn btn-success btn-sm" data-toggle="tooltip" title="Restaurar empleado"
-                           href="#">
+                           href="{{route('empleados.restaurar',$empleado->rut)}}" onclick="alert('Se restaurara el empleado')">
                             <span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>
                         </a>
                         <a class="btn btn-danger btn-sm" data-toggle="tooltip" title="Eliminar empleado"
-                           href="#" onclick="alert('¿Seguro que quiere eliminar empleado?' +
+                           href="#" onclick="alert('ï¿½Seguro que quiere eliminar empleado?' +
                             '\nPuedes recuperarlo despues');">
                             <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                         </a>
