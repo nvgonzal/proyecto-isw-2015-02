@@ -11,8 +11,8 @@
        href="{!! URL::to('empleados/create') !!}">
         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
     </a>
-    <div class="container">
-        <table class="table table-striped">
+    <div class="table-responsive">
+        <table class="table table-hover">
             <thead>
                 <th>Rut</th>
                 <th>Nombres</th>
