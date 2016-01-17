@@ -11,7 +11,7 @@ class Carga extends Model {
 
     protected $primaryKey = 'rut';
 
-    protected $incrementing = false;
+    public $incrementing = false;
 
     protected $dates = ['deleted_at'];
 

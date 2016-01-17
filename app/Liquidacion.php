@@ -12,7 +12,7 @@ class Liquidacion extends Model {
     protected $dates = ['deleted_at'];
 
     public function empleado(){
-        return $this->belongsTo('app/Empleado','rut_empleado');
+        return $this->belongsTo('app/Empleado','rut_empleado','rut');
     }
 
 }
