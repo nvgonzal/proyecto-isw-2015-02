@@ -53,6 +53,11 @@ Route::get('empleados/desvinculados',[
     'as' => 'empleados.indexDesvincualdos'
 ]);
 
+Route::get('empleados/{rut}/restore',[
+    'uses' => 'EmpleadoController@restaurar',
+    'as' => 'empleados.restaurar'
+]);
+
 //Ruta para crud de gestion de empelados
 Route::resource('empleados','EmpleadoController');
 
