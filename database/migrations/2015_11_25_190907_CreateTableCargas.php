@@ -23,7 +23,6 @@ class CreateTableCargas extends Migration {
 			$table->string('ocupacion',30);
 			$table->string('rut_empleado',12);
 			$table->timestamps();
-			$table->softDeletes();
 			//Definicion clave primaria
 			$table->primary('rut');
 			//Definicion claves foraneas

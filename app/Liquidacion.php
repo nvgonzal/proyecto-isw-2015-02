@@ -5,11 +5,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Liquidacion extends Model {
 
-    use SoftDeletes;
-
 	protected $table = 'liquidaciones';
 
-    protected $dates = ['deleted_at'];
+    protected $dates = ['fecha_emision'];
 
     public function empleado(){
         return $this->belongsTo('app/Empleado','rut_empleado','rut');

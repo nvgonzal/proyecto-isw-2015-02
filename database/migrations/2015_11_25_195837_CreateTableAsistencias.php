@@ -21,7 +21,6 @@ class CreateTableAsistencias extends Migration {
             $table->float('horas_extra');
             $table->string('rut_empleado',12);
 			$table->timestamps();
-            $table->softDeletes();
             //claves foraneas
             $table->foreign('rut_empleado')->references('rut')->on('empleados')
 				->onUpdate('cascade')->onDelete('cascade');

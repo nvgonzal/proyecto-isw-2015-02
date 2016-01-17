@@ -24,7 +24,6 @@ class CreateTableLiquidaciones extends Migration {
 			$table->text('detalle_liquidacion');
 			$table->string('rut_empleado');
 			$table->timestamps();
-			$table->softDeletes();
 			//Claves foraneas
 			$table->foreign('rut_empleado')->references('rut')->on('empleados')
 				->onUpdate('cascade')->onDelete('cascade');
