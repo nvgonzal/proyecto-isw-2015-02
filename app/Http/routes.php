@@ -73,6 +73,12 @@ Route::resource('isapres','IsapreController');
 //Ruta para crud de gestion de afps
 Route::resource('afp','AfpController');
 
+//Ruta para eliminar AFP
+Route::get('afp/{id}/delete',[
+    'uses' => 'AfpController@destroy',
+    'as' => 'afp.destroy'
+]);
+
 
 //Rutas para manejar rutas fuera de
 Route::any('{all}', function(){
