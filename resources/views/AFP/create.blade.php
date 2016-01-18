@@ -42,8 +42,8 @@
             <span class=" glyphicon glyphicon-earphone form-control-feedback"></span>
         </div>
         <div class="form-group">
-            {!! Form::label('direccion_envio', 'Direccion de envio',['class'=>'control-label']) !!}
-            {!! Form::text('direccion_envio', null,['class'=>'form-control','placeholder'=>'Ingrese direccion de envio de la AFP...']) !!}
+            {!! Form::label('link_envio', 'Direccion de envio',['class'=>'control-label']) !!}
+            {!! Form::text('link_envio', null,['class'=>'form-control','placeholder'=>'Ingrese direccion de envio de la AFP...']) !!}
         </div>
         <br/>
 
