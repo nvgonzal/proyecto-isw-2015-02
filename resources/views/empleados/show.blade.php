@@ -3,10 +3,17 @@
 @section('titulo',$empleado->nombres.' '.$empleado->apellido_paterno.' '.$empleado->apellido_materno)
 
 @section('contenido')
+    @if($empleado->deleted_at!=null)
     <ol class="breadcrumb">
-        <li><a href={{URL::to('empleados')}}>Empleados</a></li>
+        <li><a href={{URL::to('empleados/desvinculados')}}>Empleados desvinculados</a></li>
         <li class="active">{{$empleado->nombres}} {{$empleado->apellido_paterno}} {{$empleado->apellido_materno}}</li>
     </ol>
+        @else
+        <ol class="breadcrumb">
+            <li><a href={{URL::to('empleados')}}>Empleados</a></li>
+            <li class="active">{{$empleado->nombres}} {{$empleado->apellido_paterno}} {{$empleado->apellido_materno}}</li>
+        </ol>
+    @endif
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad">
 
@@ -88,6 +95,14 @@
                                     @endif
                                 </tr>
                                 <tr>
+                                    <td>Costo de programa de salud: </td>
+                                    @if($empleado->id_aseguradora==null)
+                                        <td>Empleado no tiene plan de salud</td>
+                                        @else
+                                        <td>{{"$".$empleado->costo_plan_salud}}</td>
+                                    @endif
+                                </tr>
+                                <tr>
                                     <td>Cuenta Bancaria:</td>
                                     @if($empleado->cuenta_bancaria==null)
                                         <td>Empleado sin cuenta registrada</td>
@@ -97,9 +112,14 @@
                                 </tr>
                                 <tr>
                                     <td>Sueldo base</td>
-                                    <td>{{$empleado->sueldo_base}}</td>
+                                    <td>{{"$".$empleado->sueldo_base}}</td>
                                 </tr>
-
+                                @if($empleado->deleted_at!=null)
+                                    <tr>
+                                        <td>Fecha desvinculacion</td>
+                                        <td>{{$empleado->deleted_at}}</td>
+                                    </tr>
+                                    @endif
                                 </tbody>
                             </table>
 
@@ -110,6 +130,19 @@
                 <div class="panel-footer">
                     <a data-original-title="Broadcast Message" data-toggle="tooltip" type="button"
                        class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-envelope"></i></a>
+                    @if($empleado->deleted_at!=null)
+                        <span class="pull-right">
+                            <a class="btn btn-success btn-sm" data-toggle="tooltip" title="Restaurar empleado"
+                               href="#">
+                                <span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>
+                            </a>
+                            <a class="btn btn-danger btn-sm" data-toggle="tooltip" title="Eliminar empleado"
+                               href="#" onclick="alert('¿Seguro que quiere eliminar empleado?' +
+                            '\nPuedes recuperarlo despues');">
+                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                            </a>
+                        </span>
+                        @else
                         <span class="pull-right">
                             <a href="{{URL::to('empleados/'.$empleado->rut.'/edit')}}" data-original-title="Edit this user" data-toggle="tooltip" type="button"
                                class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i></a>
@@ -118,6 +151,7 @@
                             '\nPuedes recuperarlo despues');"
                                class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></a>
                         </span>
+                        @endif
                 </div>
 
             </div>
