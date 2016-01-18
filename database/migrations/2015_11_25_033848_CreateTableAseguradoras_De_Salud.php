@@ -17,8 +17,8 @@ class CreateTableAseguradorasDeSalud extends Migration {
 			$table->increments('id');
 			$table->string('rut',14)->unique();
 			$table->string('nombre',40);
-			$table->string('telefono',35);
-			$table->string('email',50);
+			$table->string('telefono',35)->nullable();
+			$table->string('email',50)->nullable();
 			$table->string('link_envio',100);
 			$table->timestamps();
 		});
