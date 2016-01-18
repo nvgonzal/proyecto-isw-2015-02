@@ -3,7 +3,11 @@
 @section('titulo','Informacion AFP')
 
 @section('contenido')
-    <a class="btn btn-success boton-fixed btn-lg" data-toggle="tooltip" title="Agregar AFP"
+    <a class="btn btn-success boton-fixed btn-lg hidden-sm hidden-xs" data-toggle="tooltip" title="Agregar AFP"
+       href="{!! URL::to('afp/create') !!}">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+    </a>
+    <a class="btn btn-success boton-fixed btn-sm hidden-lg hidden-md" data-toggle="tooltip" title="Agregar empleado"
        href="{!! URL::to('afp/create') !!}">
         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
     </a>
