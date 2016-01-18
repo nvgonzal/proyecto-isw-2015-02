@@ -13,6 +13,16 @@ class CuentasSeeder extends Seeder{
             'created_at' => 'now',
             'updated_at' => 'now'
         ]);
+
+        $idCuenta=(array)DB::table('cuentas')
+            ->where('rut','11.111.111-1')->first();
+
+
+        DB::table('empleados')
+            ->where('rut','11.111.111-1')
+            ->update([
+            'id_cuenta' => $idCuenta['id']
+        ]);
     }
 
 }
