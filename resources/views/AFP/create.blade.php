@@ -11,15 +11,17 @@
         <h3>Formulario para ingresar nueva AFP</h3>
     </div>
     @if($errors->has())
-        <strong>Whoops!</strong> Hubo problemas con tus entradas.<br><br>
         <div class="alert alert-danger">
+            <strong>Whoops!</strong> Hubo problemas con tus entradas.
+            <ul>
             @foreach($errors->all() as $error)
-                {!! $error !!}<br>
-            @endforeach
+                    <li>{!! $error !!}</li>
+                @endforeach
+            </ul>
         </div>
     @endif
-    <div class="row">
-        {!! Form::open(['route'=>'AFP.store','class'=>'form-horizontal','metod'=>'post']) !!}
+    <div class="container">
+        {!! Form::open(['route'=>'AFP','class'=>'form-horizontal','metod'=>'post']) !!}
         <div class="form-group">
             {!! Form::label('rut','Rut',['class'=>'control-label']) !!}
             {!! Form::text('rut',null,['class'=>'form-control','placeholder'=>'Ingrese rut sin puntos ni guion',
@@ -27,25 +29,25 @@
         </div>
         <div class="form-group">
             {!! Form::label('nombre','Nombre',['class'=>'control-label']) !!}
-            {!! Form::text('nombre',null,['class'=>'form-control','placeholder'=>'Ingrese nombre de AFP']) !!}
+            {!! Form::text('nombre',null,['class'=>'form-control','placeholder'=>'Nombre institucion...']) !!}
         </div>
         <div class="form-group has-feedback">
             {!! Form::label('email', 'E-Mail',['class'=>'control-label']) !!}
-            {!! Form::text('email', null,['class'=>'form-control','placeholder'=>'Ingrese correo electronico]) !!}
+            {!! Form::text('email', null,['class'=>'form-control','placeholder'=>'Ingrese correo electronico...']) !!}
             <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
         </div>
         <div class="form-group has-feedback">
             {!! Form::label('telefono', 'Telefono',['class'=>'control-label']) !!}
-            {!! Form::text('telefono', null,['class'=>'form-control','placeholder'=>'Ingrese correo telefono]) !!}
+            {!! Form::text('telefono', null,['class'=>'form-control','placeholder'=>'Telefono contacto...']) !!}
             <span class=" glyphicon glyphicon-earphone form-control-feedback"></span>
         </div>
         <div class="form-group">
-            {!! Form::label('link', 'Sitio Web',['class'=>'control-label']) !!}
-            {!! Form::text('link', null,['class'=>'form-control','placeholder'=>'Ingrese sitio web de la AFP]) !!}
+            {!! Form::label('link_envio', 'Direccion de envio',['class'=>'control-label']) !!}
+            {!! Form::text('link_envio', null,['class'=>'form-control','placeholder'=>'Ingrese direccion de envio de la AFP...']) !!}
         </div>
         <br/>
 
-        {!! Form::submit('Ingresar AFP',['class'=>'btn btn-default']) !!}
+        {!! Form::submit('Ingresar AFP',['class'=>'btn btn-success']) !!}
 
         {!! Form::close() !!}
     </div>
@@ -55,7 +57,6 @@
 @stop
 
 @section('javascript')
-    {!! Html::script('js/bootstrap-datepicker.js') !!}
     {!! Html::script('js/jquery.Rut.js') !!}
     <script>
         function formatear_rut(){
@@ -63,14 +64,5 @@
                 validation: true,
                 on_error: function(){ alert('Rut ingresado no valido'); }
             });}
-        $('.datepicker').datepicker({
-            format: "dd-mm-yyyy",
-            weekStart: 1,
-            endDate: "0d",
-            todayBtn: "linked",
-            language: "es",
-            calendarWeeks: true,
-            todayHighlight: true
-        });
     </script>
 @stop
