@@ -4,6 +4,7 @@ use App\AFP;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Laracasts\Flash\Flash;
 
 class AfpController extends Controller {
 
@@ -23,6 +24,59 @@ class AfpController extends Controller {
 	}
 
 	/**
+	 * Show the form for editing the specified resource.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function edit($id)
+	{
+		$AFP = AFP::find($id);
+		return view('afp.edit')->with('AFP',$AFP);
+	}
+
+	/**
+	 * Update the specified resource in storage.
+	 *
+	 * @param  int  $id
+	 * @param Request $request
+	 * @return Response
+	 */
+	public function update(Request $request,$id)
+	{
+		$input = [
+			'nombre' => $request->input('nombre'),
+			'email' => $request->input('email'),
+			'telefono' => $request->input('telefono'),
+			'link_envio' => $request->input('link_envio'),
+		];
+		$rules = [
+			'nombre' => 'required|max:40',
+			'email' => 'email|max:50',
+			'telefono' => 'max:35',
+			'link_envio' => 'required|max:50',
+		];
+		$validacion = Validator::make($input,$rules);
+		if($validacion->fails()){
+			return redirect()->to('afp/'.$id.'/edit')->withInput()->withErrors($validacion->messages());
+		}
+		$AFP = AFP::find($id);
+		$AFP->setAttribute('nombre',$request->input('nombre'));
+		$AFP->setAttribute('email',$request->input('email'));
+		$AFP->setAttribute('telefono',$request->input('telefono'));
+		$AFP->setAttribute('link_envio',$request->input('link_envio'));
+		$exito=$AFP->save();
+
+		if ($exito) {
+			Flash::success('AFP actualizada');
+			return redirect('afp');
+		} else {
+			Flash::error('AFP no pudo ser actualizado');
+			return redirect('afp');
+		}
+	}
+
+	/**
 	 * Show the form for creating a new resource.
 	 *
 	 * @return Response
@@ -30,50 +84,6 @@ class AfpController extends Controller {
 	public function create()
 	{
 		return view('afp.create');
-	}
-
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $rut
-	 * @param Request $request
-	 * @return Response
-	 */
-	public function update(Request $request,$rut)
-	{
-		$input = [
-			'rut' => $request->input('rut'),
-			'nombre' => $request->input('nombre'),
-			'email' => $request->input('email'),
-			'telefono' => $request->input('telefono'),
-			'link' => $request->input('link'),
-		];
-		$rules = [
-			'rut' => 'required|unique:empleados,rut',
-			'nombre' => 'required',
-			'email' => 'required|email',
-			'telefono' => 'required',
-			'link' => 'required|url',
-		];
-		$validacion = Validator::make($input,$rules);
-		if($validacion->fails()){
-			return redirect()->to('afp/'.$rut.'/edit')->withInput()->withErrors($validacion->messages());
-		}
-		$AFP = AFP::find($rut);
-		$AFP->setAttribute('rut',$request->input('rut'));
-		$AFP->setAttribute('nombre',$request->input('nombre'));
-		$AFP->setAttribute('email',$request->input('email'));
-		$AFP->setAttribute('telefono',$request->input('telefono'));
-		$AFP->setAttribute('link',$request->input('link'));
-		$exito=$AFP->save();
-
-		if ($exito) {
-			Flash::success('afp actualizado');
-			return redirect('afp');
-		} else {
-			Flash::error('afp no puedo ser actualizado');
-			return redirect('afp');
-		}
 	}
 
 	/**
@@ -92,28 +102,29 @@ class AfpController extends Controller {
 			'link' => $request->input('link'),
 		];
 		$rules = [
-			'rut' => 'required|unique:empleados,rut',
-			'nombre' => 'required',
-			'email' => 'required|email',
-			'telefono' => 'required',
-			'link' => 'required|url',
+			'rut' => 'required|unique:afps,rut|max:14',
+			'nombre' => 'required|max:40',
+			'email' => 'email|max:50',
+			'telefono' => 'max:35',
+			'link' => 'required|max:50',
 		];
 		$validacion = Validator::make($input,$rules);
 		if($validacion->fails()){
 			return redirect()->to('afp/create')->withInput()->withErrors($validacion->messages());
 		}
 		$AFP = new AFP();
+		$AFP->setAttribute('rut',$request->input('rut'));
 		$AFP->setAttribute('nombre',$request->input('nombre'));
 		$AFP->setAttribute('email',$request->input('email'));
 		$AFP->setAttribute('telefono',$request->input('telefono'));
-		$AFP->setAttribute('link',$request->input('link'));
+		$AFP->setAttribute('link_envio',$request->input('link'));
 		$exito=$AFP->save();
 
 		if ($exito) {
-			Flash::success('afp ingresada con exito');
+			Flash::success('AFP creada');
 			return redirect('afp');
 		} else {
-			Flash::error('afp no puedo ser ingresada');
+			Flash::error('AFP no pudo ser creada');
 			return redirect('afp');
 		}
 	}
@@ -121,43 +132,33 @@ class AfpController extends Controller {
 	/**
 	 * Display the specified resource.
 	 *
-	 * @param  int  $rut
+	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($rut)
+	public function show($id)
 	{
-		$AFP = AFP::find($rut);
+		$AFP = AFP::find($id);
 		return view('afp.show')->with('afp',$AFP);
 	}
 
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $rut
-	 * @return Response
-	 */
-	public function edit($rut)
-	{
-		$AFP = AFP::find($rut);
-		return view('afp.edit')->with('afp',$AFP);
-	}
+
 
 	/**
 	 * Remove the specified resource from storage.
 	 *
-	 * @param  int  $rut
+	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($rut)
+	public function destroy($id)
 	{
-		$AFP = AFP::find($rut);
-		$exito=$AFP->delete();
+		$AFP = AFP::find($id);
+		$exito = $AFP->delete();
 		if($exito){
-			Flash::success('afp eliminada con exito');
+			Flash::success('AFP eliminada con exito');
 			return redirect('afp');
 		}
 		else{
-			Flash::error('afp no pudo ser eliminada');
+			Flash::error('AFP no pudo ser eliminada');
 			return redirect('afp');
 		}
 	}
