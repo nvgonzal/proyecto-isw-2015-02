@@ -15,9 +15,9 @@ class CreateTableEmpleados extends Migration {
 		Schema::create('empleados', function(Blueprint $table)
 		{
 			$table->string('rut',12);
-			$table->string('nombres',30);
-			$table->string('apellido_paterno',40);
-			$table->string('apellido_materno',40);
+			$table->string('nombres',50);
+			$table->string('apellido_paterno',50);
+			$table->string('apellido_materno',50);
 			$table->date('f_nacimiento');
 			$table->date('f_incorporacion');
 			$table->string('cargo');
