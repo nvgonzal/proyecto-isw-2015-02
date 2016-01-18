@@ -18,8 +18,16 @@
             <tr>
                 <td>{{$AFP->id}}</td>
                 <td>{{$AFP->nombre}}</td>
-                <td>{{$AFP->email}}</td>
+                @if($AFP->email!=null)
+                    <td>{{$AFP->email}}</td>
+                @else
+                    <td>Sin email de contacto</td>
+                @endif
+                @if($AFP->telefono)
                 <td>{{$AFP->telefono}}</td>
+                @else
+                    <td>Sin telefono de contacto</td>
+                @endif
                 <td>{{$AFP->link_envio}}</td>
                 <td>
                     </a>
@@ -28,8 +36,8 @@
                         <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                     </a>
                     <a class="btn btn-danger btn-sm" data-toggle="tooltip" title="Eliminar AFP"
-                       href="{{ route('afp.destroy',$AFP->rut) }}" onclick="alert('¿Seguro que quiere eliminar AFP?' +
-                            '\nPuedes recuperarlo despues');">
+                       href="{{ route('afp.destroy',$AFP->id) }}" onclick="alert('Â¿Seguro que quiere eliminar afp?' +
+                         '\nPuedes recuperarlo despues');">
                         <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                     </a>
                 </td>

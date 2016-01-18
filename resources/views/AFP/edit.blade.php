@@ -4,8 +4,7 @@
 
 @section('contenido')
     <ol class="breadcrumb">
-        <li><a href={{URL::to('afp')}}>AFP</a></li>
-        <li><a href="{{url::to('afp/'.$AFP->rut)}}">{{$AFP->nombre}} </a></li>
+        <li><a href={{URL::to('AFP')}}>AFP</a></li>
         <li class="active">Editar</li>
     </ol>
     <div class="page-header">
@@ -24,6 +23,10 @@
     <div class="row">
         {!! Form::model($AFP,['route'=>['afp.update',$AFP],'class'=>'form-horizontal','method'=>'PUT']) !!}
         <div class="form-group">
+            {!! Form::label('rut','Rut',['class'=>'control-label']) !!}
+            {!! Form::text('rut',null,['class'=>'form-control','disabled']) !!}
+        </div>
+        <div class="form-group">
             {!! Form::label('nombre','Nombre',['class'=>'control-label']) !!}
             {!! Form::text('nombre',null,['class'=>'form-control','placeholder'=>'Ingrese nombre de AFP']) !!}
         </div>
@@ -38,10 +41,10 @@
             <span class=" glyphicon glyphicon-earphone form-control-feedback"></span>
         </div>
         <div class="form-group">
-            {!! Form::label('link_envio', 'Sitio Web',['class'=>'control-label']) !!}
-            {!! Form::text('link_envio', null,['class'=>'form-control','placeholder'=>'Ingrese sitio web de la AFP']) !!}
+            {!! Form::label('link_envio', 'Direccion de envio',['class'=>'control-label']) !!}
+            {!! Form::text('link_envio', null,['class'=>'form-control','placeholder'=>'Ingrese direccion de envio a la AFP']) !!}
         </div>
-        <br/>
+
 
         {!! Form::submit('Modificar informacion de AFP',['class'=>'btn btn-success']) !!}
 

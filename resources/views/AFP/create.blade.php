@@ -21,7 +21,7 @@
         </div>
     @endif
     <div class="container">
-        {!! Form::open(['route'=>'AFP','class'=>'form-horizontal','metod'=>'post']) !!}
+        {!! Form::open(['route'=>'afp.store','class'=>'form-horizontal','metod'=>'POST']) !!}
         <div class="form-group">
             {!! Form::label('rut','Rut',['class'=>'control-label']) !!}
             {!! Form::text('rut',null,['class'=>'form-control','placeholder'=>'Ingrese rut sin puntos ni guion',
@@ -42,8 +42,8 @@
             <span class=" glyphicon glyphicon-earphone form-control-feedback"></span>
         </div>
         <div class="form-group">
-            {!! Form::label('link_envio', 'Direccion de envio',['class'=>'control-label']) !!}
-            {!! Form::text('link_envio', null,['class'=>'form-control','placeholder'=>'Ingrese direccion de envio de la AFP...']) !!}
+            {!! Form::label('direccion_envio', 'Direccion de envio',['class'=>'control-label']) !!}
+            {!! Form::text('direccion_envio', null,['class'=>'form-control','placeholder'=>'Ingrese direccion de envio de la AFP...']) !!}
         </div>
         <br/>
 

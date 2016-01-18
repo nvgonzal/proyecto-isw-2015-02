@@ -20,7 +20,7 @@ class AfpController extends Controller {
 	public function index()
 	{
 		$AFPs = AFP::paginate(10);
-		return view('afp.index')->with('AFPs',$AFPs);
+		return view('AFP.index')->with('AFPs',$AFPs);
 	}
 
 	/**
@@ -32,7 +32,7 @@ class AfpController extends Controller {
 	public function edit($id)
 	{
 		$AFP = AFP::find($id);
-		return view('afp.edit')->with('AFP',$AFP);
+		return view('AFP.edit')->with('AFP',$AFP);
 	}
 
 	/**
@@ -48,13 +48,13 @@ class AfpController extends Controller {
 			'nombre' => $request->input('nombre'),
 			'email' => $request->input('email'),
 			'telefono' => $request->input('telefono'),
-			'link_envio' => $request->input('link_envio'),
+			'direccion_envio' => $request->input('link_envio'),
 		];
 		$rules = [
 			'nombre' => 'required|max:40',
 			'email' => 'email|max:50',
 			'telefono' => 'max:35',
-			'link_envio' => 'required|max:50',
+			'direccion_envio' => 'required|max:50',
 		];
 		$validacion = Validator::make($input,$rules);
 		if($validacion->fails()){
@@ -83,7 +83,7 @@ class AfpController extends Controller {
 	 */
 	public function create()
 	{
-		return view('afp.create');
+		return view('AFP.create');
 	}
 
 	/**
@@ -99,14 +99,14 @@ class AfpController extends Controller {
 			'nombre' => $request->input('nombre'),
 			'email' => $request->input('email'),
 			'telefono' => $request->input('telefono'),
-			'link' => $request->input('link'),
+			'direccion_envio' => $request->input('link_envio'),
 		];
 		$rules = [
 			'rut' => 'required|unique:afps,rut|max:14',
 			'nombre' => 'required|max:40',
 			'email' => 'email|max:50',
 			'telefono' => 'max:35',
-			'link' => 'required|max:50',
+			'direccion_envio' => 'required|max:50',
 		];
 		$validacion = Validator::make($input,$rules);
 		if($validacion->fails()){
@@ -117,7 +117,7 @@ class AfpController extends Controller {
 		$AFP->setAttribute('nombre',$request->input('nombre'));
 		$AFP->setAttribute('email',$request->input('email'));
 		$AFP->setAttribute('telefono',$request->input('telefono'));
-		$AFP->setAttribute('link_envio',$request->input('link'));
+		$AFP->setAttribute('link_envio',$request->input('link_envio'));
 		$exito=$AFP->save();
 
 		if ($exito) {
@@ -138,7 +138,7 @@ class AfpController extends Controller {
 	public function show($id)
 	{
 		$AFP = AFP::find($id);
-		return view('afp.show')->with('afp',$AFP);
+		return view('AFP.show')->with('AFP',$AFP);
 	}
 
 
