@@ -13,9 +13,9 @@ class IsapreController extends Controller {
 	 */
 	public function index()
 	{
-		$isapre = Aseguradora::paginate(20);
+		$isapres = Aseguradora::paginate(10);
 
-		return view('isapre.index')->with('isapre',$isapre);
+		return view('isapre.index')->with('isapres',$isapres);
 	}
 
 	/**
@@ -33,6 +33,7 @@ class IsapreController extends Controller {
 	/**
 	 * Store a newly created resource in storage.
 	 *
+	 * @param Request $re
 	 * @return Response
 	 */
 	public function store(Request $request)
@@ -61,9 +62,6 @@ class IsapreController extends Controller {
 		$isapre->setAttribute('Nombre Isapre',$request->input('Nombre Isapre'));
 		$isapre->setAttribute('Telefono',$request->input('Telefono'));
 		$isapre->setAttribute('E-mail',$request->input('E-mail'));
-		$now = date('Y-m-d H:i:s');
-		$isapre->setAttribute('created_at',$now);
-		$isapre->setAttribute('updated_at',$now);
 		$isapre->save();
 		return view('isapre.createexito');
 	}
