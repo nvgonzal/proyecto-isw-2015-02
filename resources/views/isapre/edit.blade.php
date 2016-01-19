@@ -8,7 +8,7 @@
         <li class="active">Ingresar ISAPRE</li>
     </ol>
     <div class="page-header">
-        <h3>Formulario ingreso informacion previsional (ISAPRE)</h3>
+        <h3>Formulario edicion ISAPRE {{$isapre->nombre}}</h3>
     </div>
     @if($errors->has())
         <div class="alert alert-danger">
@@ -21,10 +21,10 @@
         </div>
     @endif
     <div class="container">
-        {!! Form::open(['route'=>'isapres.store','class'=>'form-horizontal','method'=>'POST']) !!}
+        {!! Form::model($isapre,['route'=>['isapres.update',$isapre],'class'=>'form-horizontal','method'=>'PUT']) !!}
         <div class="form-group">
             {!! Form::label('rut','RUT Institucion',['class'=>'control-label']) !!}
-            {!! Form::text('rut',null,['class'=>'form-control','placeholder'=>'Ingrese RUT institucion...']) !!}
+            {!! Form::text('rut',null,['class'=>'form-control','placeholder'=>'Ingrese RUT institucion...','disabled']) !!}
         </div>
         <div class="form-group">
             {!! Form::label('nombre', 'Nombre Isapre',['class'=>'control-label']) !!}
@@ -51,15 +51,4 @@
         <br>
         <br>
     </div>
-@stop
-
-@section('javascript')
-    {!! Html::script('js/jquery.Rut.js') !!}
-    <script>
-        function formatear_rut(){
-            $("#rut").Rut({
-                validation: true,
-                on_error: function(){ alert('Rut ingresado no valido'); }
-            });}
-    </script>
 @stop

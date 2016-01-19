@@ -45,8 +45,8 @@ class AseguradorasSeeder extends Seeder{
             DB::table('salud')->insert([
                 'nombre' => $nombres[$i],
                 'rut' => $rut[$i],
-                'telefono' => $faker->phoneNumber,
-                'email' => $faker->companyEmail,
+                'telefono' => $faker->optional()->phoneNumber,
+                'email' => $faker->optional()->companyEmail,
                 'link_envio' => $faker->unique()->ipv4,
                 'created_at' => 'now',
                 'updated_at' => 'now'

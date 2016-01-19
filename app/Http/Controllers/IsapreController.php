@@ -2,7 +2,10 @@
 
 use App\Aseguradora;
 use App\Http\Requests;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Laracasts\Flash\Flash;
 
 class IsapreController extends Controller {
 
@@ -17,7 +20,7 @@ class IsapreController extends Controller {
 	 */
 	public function index()
 	{
-		$isapres = Aseguradora::paginate(10);
+		$isapres = Aseguradora::orderBy('id')->paginate(10);
 
 		return view('isapre.index')->with('isapres',$isapres);
 	}
@@ -37,37 +40,43 @@ class IsapreController extends Controller {
 	/**
 	 * Store a newly created resource in storage.
 	 *
-	 * @param Request $re
+	 * @param Request $request
 	 * @return Response
 	 */
 	public function store(Request $request)
 	{
-		//
 		$input = [
-			'Rut Institucion' => $request->input('Rut Institucion'),
-			'Nombre Isapre' => $request->input('Nombre Isapre'),
-			'Telefono' => $request->input('Telefono'),
-			'E-mail' => $request->input('E-mail'),
-			'Link' => $request->input('Link'),
+			'rut' => $request->input('rut'),
+			'nombre' => $request->input('nombre'),
+			'telefono' => $request->input('telefono'),
+			'email' => $request->input('email'),
+			'direccion_envio' => $request->input('link_envio'),
 		];
 		$rules = [
-			'Rut Institucion' => 'required|unique:empleados','Rut Institucion',
-			'Nombre Isapre' => 'required',
-			'Telefono' => 'required|Telefono',
-			'E-mail' => 'required',
-			'link' => 'required|url',
+			'rut' => 'required|unique:salud,rut|max:14',
+			'nombre' => 'required|max:40',
+			'telefono' => 'max:35',
+			'email' => 'max:50',
+			'direccion_envio' => 'required',
 		];
 		$validacion = Validator::make($input,$rules);
 		if($validacion->fails()){
-			return redirect()->to('isapre/create')->withInput()->withErrors($validacion->messages());
+			return redirect()->to('isapres/create')->withInput()->withErrors($validacion->messages());
 		}
 		$isapre = new Aseguradora();
-		$isapre->setAttribute('Rut Institucion',$request->input('Rut Institucion'));
-		$isapre->setAttribute('Nombre Isapre',$request->input('Nombre Isapre'));
-		$isapre->setAttribute('Telefono',$request->input('Telefono'));
-		$isapre->setAttribute('E-mail',$request->input('E-mail'));
-		$isapre->save();
-		return view('isapre.createexito');
+		$isapre->setAttribute('rut',$request->input('rut'));
+		$isapre->setAttribute('nombre',$request->input('nombre'));
+		$isapre->setAttribute('telefono',$request->input('telefono'));
+		$isapre->setAttribute('email',$request->input('email'));
+		$isapre->setAttribute('link_envio',$request->input('link_envio'));
+		$exito=$isapre->save();
+		if($exito){
+			Flash::success('ISAPRE ingresda correctamente');
+			return(redirect('isapres'));
+		}
+		else{
+			Flash::error('Error al ingresar ISAPRE');
+		}
 	}
 
 	/**
@@ -79,7 +88,7 @@ class IsapreController extends Controller {
 	public function show($id)
 	{
 		//
-		$isapre = isapre::find($id);
+		$isapre = Aseguradora::find($id);
 		return view('isapre.show')->with('isapre',$isapre);
 	}
 
@@ -92,49 +101,49 @@ class IsapreController extends Controller {
 	public function edit($id)
 	{
 		$isapre = Aseguradora::find($id);
-		return redirect('isapre.edit.editar')->with('isapre',$isapre);
+		return view('isapre.edit')->with('isapre',$isapre);
 	}
 
 
 	/**
 	 * Update the specified resource in storage.
 	 *
+	 * @param Request $request
 	 * @param  int  $id
 	 * @return Response
 	 */
 	public function update(Request $request,$id)
 	{
-		dd($request);
-			$input = [
-						'Rut Institucion' => $request->input('Rut Institucion'),
-						'Nombre Isapre' => $request->input('Nombre Isapre'),
-						'Telefono' => $request->input('Telefono'),
-						'E-mail' => $request->input('E-mail'),
-						'Link'=>$request->input('Link'),
-			];
-				$rules = [
-						'Rut Institucion' => 'required|unique:isapre,Rut Institucion',
-						'Nombre Isapre' => 'required',
-						'Telefono' => 'required',
-						'E-mail' => 'required|E-mail',
-						'Link'=>'required',
-							];
-				$validacion = Validator::make($input,$rules);
-				if($validacion->fails()){
-					return redirect()->to('isapre/create')->withInput()->withErrors($validacion->messages());
+		$input = [
+			'nombre' => $request->input('nombre'),
+			'telefono' => $request->input('telefono'),
+			'email' => $request->input('email'),
+			'direccion_envio' => $request->input('link_envio'),
+		];
+		$rules = [
+			'nombre' => 'required|max:40',
+			'telefono' => 'max:35',
+			'email' => 'max:50',
+			'direccion_envio' => 'required|max:100',
+		];
+		$validacion = Validator::make($input,$rules);
+		if($validacion->fails()){
+			return redirect()->to('isapres/'.$id.'/edit')->withInput()->withErrors($validacion->messages());
 		}
-		$isapre = isapre::find($id);
-		$isapre->setAttribute('Rut Institucion',$request->input('Rut Institucion'));
-		$isapre->setAttribute('Nombre Isapre',$request->input('Nombre Isapre'));
-		$isapre->setAttribute('Telefono',$request->input('Telefono'));
-		$isapre->setAttribute('E-mail',$request->input('E-mail'));
-		$isapre->setAttribute('Link',$_REQUEST->input('Link'));
-
-		/*$now = date('Y-m-d H:i:s');
-		$isapre->setAttribute('updated_at',$now);*/
-		$isapre->save();
-		Flash::success('ingresado con exito');
-		return redirect('isapre');
+		$isapre = Aseguradora::find($id);
+		$isapre->setAttribute('nombre', $request->input('nombre'));
+		$isapre->setAttribute('telefono', $request->input('telefono'));
+		$isapre->setAttribute('email', $request->input('email'));
+		$isapre->setAttribute('link_envio', $request->input('link_envio'));
+		$exito=$isapre->save();
+		if($exito){
+			Flash::success('Informacion de ISAPRE actualizada con exito');
+			return redirect('isapres');
+		}
+		else{
+			Flash::error('Informacion de ISAPRE no puedo ser actualizada');
+			return redirect('isapres');
+		}
  	}
 
 	/**
@@ -145,17 +154,21 @@ class IsapreController extends Controller {
 	 */
 	public function destroy($id)
 	{
-			$isapre = isapre::find($id);
-			$exito=$isapre->delete();
-			if($exito){
-				Flash::success(' eliminada con exito');
-				return redirect('isapre');
-			}
-			else{
-				Flash::error('no fue eliminada');
-				return redirect('isapre');
-			}
-
+        try {
+            $isapre = Aseguradora::find($id);
+            $exito = $isapre->delete();
+            if ($exito) {
+                Flash::success('ISAPRE eliminada con exito');
+                return redirect('isapres');
+            } else {
+                Flash::error('ISAPRE no pudo ser eliminada');
+                return redirect('isapres');
+            }
+        }
+        catch(QueryException $e){
+            Flash::error('Hay empleados vinculados a la ISAPRE');
+            return redirect('isapres');
+        }
 
 	}
 

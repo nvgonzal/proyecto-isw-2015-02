@@ -3,7 +3,15 @@
 @section('titulo','Informacion ISAPRES')
 
 @section('contenido')
-    <table class="table table-striped">
+    <a class="btn btn-success boton-fixed btn-lg hidden-sm hidden-xs" data-toggle="tooltip" title="Agregar AFP"
+       href="{!! URL::to('isapres/create') !!}">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+    </a>
+    <a class="btn btn-success boton-fixed btn-sm hidden-lg hidden-md" data-toggle="tooltip" title="Agregar empleado"
+       href="{!! URL::to('isapres/create') !!}">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+    </a>
+    <table class="table table-hover">
         <th>ID</th>
         <th>Rut</th>
         <th>Nombre</th>
@@ -16,17 +24,25 @@
                 <td>{{$isapre->id}}</td>
                 <td>{{$isapre->rut}}</td>
                 <td>{{$isapre->nombre}}</td>
-                <td>{{$isapre->telefono}}</td>
-                <td>{{$isapre->email}}</td>
+                @if($isapre->email!=null)
+                    <td>{{$isapre->email}}</td>
+                @else
+                    <td>Sin email de contacto</td>
+                @endif
+                @if($isapre->telefono)
+                    <td>{{$isapre->telefono}}</td>
+                @else
+                    <td>Sin telefono de contacto</td>
+                @endif
                 <td>{{$isapre->link_envio}}</td>
                 <td>
                     </a>
                     <a class="btn btn-warning btn-sm" data-toggle="tooltip" title="Editar informacion"
-                       href="#">
+                       href="{{URL::to('isapres/'.$isapre->id.'/edit')}}">
                         <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                     </a>
                     <a class="btn btn-danger btn-sm" data-toggle="tooltip" title="Eliminar AFP"
-                       href="#" onclick="alert('�Seguro que quiere eliminar ISAPRE?');">
+                       href="{{route('isapres.destroy',$isapre->id)}}" onclick="alert('Se eliminara ISAPRE');">
                         <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                     </a>
                 </td>
@@ -34,6 +50,4 @@
         @endforeach
     </table>
     <div class="text-center"> {!! $isapres->render() !!}</div>
-
-
-    @stop
+@stop
