@@ -166,7 +166,7 @@ class IsapreController extends Controller {
             }
         }
         catch(QueryException $e){
-            Flash::error('Hay empleados vinculados a la ISAPRE');
+            Flash::error('¡ISAPRE no pudo ser eliminada porque tiene empleados asociada a ella!');
             return redirect('isapres');
         }
 
