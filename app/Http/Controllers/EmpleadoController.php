@@ -123,7 +123,7 @@ class EmpleadoController extends Controller {
 	public function show($rut)
 	{
 		//
-		$empleado = Empleado::withTrashed()->find($rut);
+		$empleado = Empleado::withTrashed()->findOrFail($rut);
 		return view('empleados.show')->with('empleado',$empleado);
 	}
 
