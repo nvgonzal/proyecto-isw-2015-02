@@ -3,15 +3,16 @@
 use App\Http\Requests;
 use App\Empleado;
 
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Laracasts\Flash\Flash;
 
 class EmpleadoController extends Controller {
 
+	protected $sueldo_minimo;
+
 	public function __construct(){
-		// Para toda petición a alguna función de este Controlador, primero se ejecutará el Middleware que
-		// verifica que el usuario ha iniciado sesión
 		$this->middleware('auth');
 	}
 	/**
@@ -33,13 +34,11 @@ class EmpleadoController extends Controller {
 	 */
 	public function create()
 	{
-		//
 		return view('empleados.create');
 	}
 
 	/**
 	 * Store a newly created resource in storage.
-	 *
 	 * @param Request $request
 	 * @return Response
 	 */
@@ -56,26 +55,30 @@ class EmpleadoController extends Controller {
 			'titulo' => $request->input('titulo'),
 			'telefono' => $request->input('telefono'),
 			'email' => $request->input('email'),
+            'sueldo_base' => $request->input('sueldo_base'),
 			'domicilio' => $request->input('sueldo_base'),
 			'id_afp' => $request->input('id_afp'),
 			'id_aseguradora' => $request->input('id_aseguradora'),
 			'cuenta_bancaria' => $request->input('cuenta_bancaria'),
+			'costo_plan_salud' => $request->input('costo_plan_salud'),
 		];
 		$rules = [
-			'rut' => 'required|unique:empleados,rut|max:12',
-			'nombres' => 'required',
-			'apellido_paterno' => 'required',
-			'apellido_materno' => 'required',
-			'fecha_nacimiento' => 'required|date_format:d-m-Y',
-			'fecha_incorporacion' => 'required|date_format:d-m-Y',
-			'cargo' => 'required',
-			'titulo' => 'required',
-			'telefono' => 'required',
-			'email' => 'required|email',
-			'domicilio' => 'required',
-			'id_afp' => 'required|exists:afps,id',
-			'id_aseguradora' => '',
-			'cuenta_bancaria' => '',
+			'rut' 				 	=> 'required|unique:empleados,rut|max:12',
+			'nombres' 			 	=> 'required|max:30',
+			'apellido_paterno' 	 	=> 'required|max:40',
+			'apellido_materno' 	 	=> 'required|max:40',
+			'fecha_nacimiento' 	 	=> 'required|date_format:d-m-Y',
+			'fecha_incorporacion' 	=> 'required|date_format:d-m-Y',
+			'cargo' 			 	=> 'required|max:255',
+			'titulo' 			 	=> 'required|max:255',
+			'telefono' 			 	=> 'required|max:35',
+			'email' 			 	=> 'required|email|max:30',
+            'sueldo_base'           => 'required|numeric',
+			'domicilio' 		 	=> 'required|max:255',
+			'id_afp' 			 	=> 'required|exists:afps,id',
+			'id_aseguradora' 	 	=> 'exists:salud,id',
+			'cuenta_bancaria' 	 	=> 'alpha_num',
+			'costo_plan_salud'		=> 'number'
 		];
 		$validacion = Validator::make($input,$rules);
 		if($validacion->fails()){
@@ -120,7 +123,7 @@ class EmpleadoController extends Controller {
 	public function show($rut)
 	{
 		//
-		$empleado = Empleado::find($rut);
+		$empleado = Empleado::withTrashed()->find($rut);
 		return view('empleados.show')->with('empleado',$empleado);
 	}
 
@@ -160,6 +163,7 @@ class EmpleadoController extends Controller {
 			'id_afp' => $request->input('id_afp'),
 			'id_aseguradora' => $request->input('id_aseguradora'),
 			'cuenta_bancaria' => $request->input('cuenta_bancaria'),
+			'costo_plan_salud' => $request->input('costo_plan_salud'),
 		];
 		$rules = [
 			'nombres' => 'required',
@@ -173,8 +177,9 @@ class EmpleadoController extends Controller {
 			'email' => 'required|email',
 			'domicilio' => 'required',
 			'id_afp' => 'required|exists:afps,id',
-			'id_aseguradora' => '',
-			'cuenta_bancaria' => '',
+			'id_aseguradora' => 'exist:salud,id',
+			'cuenta_bancaria' => 'alpha_num',
+			'costo_plan_salud'=>'number'
 		];
 		$validacion = Validator::make($input,$rules);
 		if($validacion->fails()){
@@ -217,13 +222,53 @@ class EmpleadoController extends Controller {
 		$empleado = Empleado::find($id);
 		$exito=$empleado->delete();
 		if($exito){
-			Flash::success('Empleado eliminado con exito');
+			Flash::success('Empleado desvinculado con exito');
 			return redirect('empleados');
 		}
 		else{
-			Flash::error('Empleado no pudo ser eliminado');
+			Flash::error('Empleado no pudo ser desvinculado');
 			return redirect('empleados');
 		}
+	}
+
+	/**
+	 * Muestra los empleados desvinculados
+	 * @return Response
+	 */
+	public function indexDesvinculados()
+	{
+		$empleadosDesvinculados = Empleado::onlyTrashed()->orderBy('apellido_paterno')->paginate(10);
+		return view('empleados.indexDesvinculados')->with('empleados',$empleadosDesvinculados);
+	}
+
+	public function restaurar($rut)
+	{
+		$empleado = Empleado::onlyTrashed()->find($rut);
+		$exito=$empleado->restore();
+		if($exito){
+			Flash::success('Empleado restaurado');
+			return redirect('empleados/desvinculados');
+		}
+		else {
+			Flash::error('Empleado no pudo ser restaurado');
+			return redirect('empleados/desvinculados');
+		}
+	}
+
+	public function borrar($rut)
+	{
+		try
+		{
+			$empleado = Empleado::all()->find($rut);
+			$empleado->forceDelete();
+			Flash::success('Empleado eliminado con exito');
+			return redirect('empleados/desvinculados');
+		}
+		catch(QueryException $e){
+			Flash::error('Empleado no pudo ser eliminado');
+			return redirect('empleado/desvinculado');
+		}
+
 	}
 
 }

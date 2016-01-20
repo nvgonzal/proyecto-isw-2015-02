@@ -110,12 +110,16 @@
             </select>
         </div>
         <div class="form-group">
+            {!! Form::label('costo_plan_salud','Costo plan salud') !!}
+            {!! Form::number('costo_plan_salud',null,['class'=>'form-control','placeholder'=>'Ingrese costro plan de salud']) !!}
+        </div>
+        <div class="form-group">
             {!! Form::label('cuenta_bancaria', 'Cuenta Bancaria',['class'=>'control-label']) !!}
             {!! Form::text('cuenta_bancaria', null,['class'=>'form-control','placeholder'=>'Ingrese cuenta bancaria del empleado (opcional)']) !!}
         </div>
         <div class="form-group">
             {!! Form::label('sueldo_base', 'Sueldo Base',['class'=>'control-label']) !!}
-            {!! Form::text('sueldo_base', null,['class'=>'form-control','placeholder'=>'Ingrese suledo base del empleado...']) !!}
+            {!! Form::number('sueldo_base', null,['class'=>'form-control','placeholder'=>'Ingrese suledo base del empleado...']) !!}
         </div>
         <br/>
 
