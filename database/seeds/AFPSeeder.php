@@ -27,15 +27,14 @@ class AFPSeeder extends Seeder
         ];
 
         for($i=0;$i<6;$i++){
-            $now = date('Y-m-d H:i:s');
             DB::table('afps')->insert([
                 'nombre' => $nombres[$i],
                 'rut' => $rut[$i],
-                'telefono' => $faker->phoneNumber,
-                'email' => $faker->companyEmail,
+                'telefono' => $faker->optional()->phoneNumber,
+                'email' => $faker->optional()->companyEmail,
                 'link_envio' => $faker->unique()->ipv4,
-                'created_at' => $now,
-                'updated_at' => $now
+                'created_at' => 'now',
+                'updated_at' => 'now'
             ]);
         }
 
