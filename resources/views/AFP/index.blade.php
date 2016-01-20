@@ -11,7 +11,7 @@
        href="{!! URL::to('afp/create') !!}">
         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
     </a>
-    <table class="table table-striped">
+    <table class="table table-hover">
         <th>ID</th>
         <th>Nombre</th>
         <th>Email</th>
@@ -40,8 +40,7 @@
                         <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                     </a>
                     <a class="btn btn-danger btn-sm" data-toggle="tooltip" title="Eliminar AFP"
-                       href="{{ route('afp.destroy',$AFP->id) }}" onclick="alert('¿Seguro que quiere eliminar afp?' +
-                         '\nPuedes recuperarlo despues');">
+                       href="{{ route('afp.destroy',$AFP->id) }}" onclick="alert('Se eliminara la AFP');">
                         <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                     </a>
                 </td>

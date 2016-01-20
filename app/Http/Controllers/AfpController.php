@@ -2,6 +2,7 @@
 
 use App\AFP;
 use App\Http\Requests;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Laracasts\Flash\Flash;
@@ -19,7 +20,7 @@ class AfpController extends Controller {
 	 */
 	public function index()
 	{
-		$AFPs = AFP::paginate(10);
+		$AFPs = AFP::orderBy('id')->paginate(10);
 		return view('AFP.index')->with('AFPs',$AFPs);
 	}
 
@@ -68,10 +69,10 @@ class AfpController extends Controller {
 		$exito=$AFP->save();
 
 		if ($exito) {
-			Flash::success('AFP actualizada');
+			Flash::success('Datos de la AFP han sido actualizados');
 			return redirect('afp');
 		} else {
-			Flash::error('AFP no pudo ser actualizado');
+			Flash::error('Datos de la AFP no pudieron ser actualizados');
 			return redirect('afp');
 		}
 	}
@@ -121,10 +122,10 @@ class AfpController extends Controller {
 		$exito=$AFP->save();
 
 		if ($exito) {
-			Flash::success('AFP creada');
+			Flash::success('AFP ingresada al sistema');
 			return redirect('afp');
 		} else {
-			Flash::error('AFP no pudo ser creada');
+			Flash::error('AFP no pudo ser ingresada');
 			return redirect('afp');
 		}
 	}
@@ -151,16 +152,20 @@ class AfpController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		$AFP = AFP::find($id);
-		$exito = $AFP->delete();
-		if($exito){
-			Flash::success('AFP eliminada con exito');
-			return redirect('afp');
-		}
-		else{
-			Flash::error('AFP no pudo ser eliminada');
-			return redirect('afp');
-		}
+        try {
+            $AFP = AFP::find($id);
+            $exito = $AFP->delete();
+            if ($exito) {
+                Flash::success('AFP eliminada con exito');
+                return redirect('afp');
+            } else {
+                Flash::error('AFP no pudo ser eliminada');
+                return redirect('afp');
+            }
+        } catch (QueryException $e) {
+            Flash::error('¡AFP no pudo ser eliminada porque tiene empleados asociada a ella!');
+            return redirect('afp');
+        }
 	}
 
 }
