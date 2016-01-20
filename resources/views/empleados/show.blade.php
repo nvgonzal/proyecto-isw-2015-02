@@ -133,12 +133,11 @@
                     @if($empleado->deleted_at!=null)
                         <span class="pull-right">
                             <a class="btn btn-success btn-sm" data-toggle="tooltip" title="Restaurar empleado"
-                               href="#">
+                               href="{{route('empleados.restaurar',$empleado->rut)}}">
                                 <span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>
                             </a>
                             <a class="btn btn-danger btn-sm" data-toggle="tooltip" title="Eliminar empleado"
-                               href="#" onclick="alert('¿Seguro que quiere eliminar empleado?' +
-                            '\nPuedes recuperarlo despues');">
+                               href="{{route('empleados.delete',$empleado->rut)}}" onclick="alert('¡Se eliminara al empleado!');">
                                 <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                             </a>
                         </span>
