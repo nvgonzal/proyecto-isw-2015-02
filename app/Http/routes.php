@@ -67,8 +67,19 @@ Route::get('empleados/{rut}/delete',[
     'as' => 'empleados.destroy'
 ]);
 
+Route::get('empleados/{rut}/destroy',[
+    'uses' => 'EmpleadoController@borrar',
+    'as' => 'empleados.delete'
+]);
+
 //Ruta para crud de gestion isapres
 Route::resource('isapres','IsapreController');
+
+//Ruta para eliminar ISAPRE
+Route::get('isapres/{id}/delete',[
+    'uses' => 'IsapreController@destroy',
+    'as' => 'isapres.destroy'
+]);
 
 //Ruta para crud de gestion de afps
 Route::resource('afp','AfpController');
